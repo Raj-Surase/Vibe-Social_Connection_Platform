@@ -1,8 +1,11 @@
 import "package:firebase_auth/firebase_auth.dart";
+import "package:vibe/Components/dialogbox.dart";
 import "package:vibe/Screens/home_page.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:hooks_riverpod/hooks_riverpod.dart";
+import "package:vibe/Styles/colors.dart";
+import "package:vibe/Styles/typography.dart";
 import "package:vibe/authentication/login_ui.dart";
 
 import "../Application/Authentication/auth_events.dart";
@@ -32,38 +35,30 @@ class LoginPage extends HookConsumerWidget {
         () {},
         (either) => either.fold(
           (failure) {
-            buildCustomSnackBar(
+            showDialog(
                 context: context,
-                flashBackground: Colors.red,
-                icon: Icons.warning_rounded,
-                content: Text(
-                  failure.maybeMap(
-                      orElse: () => "",
-                      emailAlreadyInUse: (value) => "User already exists",
-                      serverError: (value) {
-                        return "Server error occurred";
-                      },
-                      invalidEmailAndPasswordCombination: (value) {
-                        return "Invalid email or password";
-                      }),
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: Colors.white),
-                ));
+                builder: (BuildContext context) {
+                  return DialogBox(
+                    color: AppColor.componentError,
+                    text: Text(
+                      "Invalid Login",
+                      style: AppTypography.textStyle14Error,
+                    ),
+                  );
+                });
           },
           (success) {
-            buildCustomSnackBar(
+            showDialog(
                 context: context,
-                flashBackground: Colors.green,
-                icon: CupertinoIcons.check_mark_circled_solid,
-                content: Text(
-                  "Login successful",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: Colors.white),
-                ));
+                builder: (BuildContext context) {
+                  return DialogBox(
+                    color: AppColor.primaryButton,
+                    text: Text(
+                      "Login successfull",
+                      style: AppTypography.textStyle14Error,
+                    ),
+                  );
+                });
             Navigator.push<Widget>(
                 context,
                 MaterialPageRoute(

@@ -4,6 +4,7 @@ import 'package:vibe/Screens/login.dart';
 import 'package:vibe/Styles/colors.dart';
 import 'package:vibe/Styles/typography.dart';
 import 'package:vibe/Styles/values.dart';
+import 'package:vibe/authentication/login_bl.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -53,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
             // SizedBox(
             //   height: ValuesConstants.ratioOneForth(context),
             // ),
-            const Center(
+            Center(
               child: Text(
                 "Register",
                 style: AppTypography.textStyle24Bold,
@@ -62,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.containerSmallMedium,
             ),
-            const Text(
+            Text(
               "User Name",
               style: AppTypography.textStyle14Bold,
             ),
@@ -86,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.paddingTB,
             ),
-            const Text(
+            Text(
               "Email id",
               style: AppTypography.textStyle14Bold,
             ),
@@ -111,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.paddingTB,
             ),
-            const Text(
+            Text(
               "Password",
               style: AppTypography.textStyle14Bold,
             ),
@@ -135,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.paddingTB,
             ),
-            const Text(
+            Text(
               "Confirm Password",
               style: AppTypography.textStyle14Bold,
             ),
@@ -161,10 +162,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
+                      builder: (context) => LoginPage(),
                     ));
               }),
-              child: const Text(
+              child: Text(
                 "Already have an account? Sign in.",
                 style: AppTypography.textStyle10Link,
               ),
@@ -185,9 +186,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 }),
                 style: const ButtonStyle(
                   backgroundColor:
-                      MaterialStatePropertyAll(AppColor.primaryButton),
+                      WidgetStatePropertyAll(AppColor.primaryButton),
                 ),
-                child: const Text(
+                child: Text(
                   'Register',
                   style: AppTypography.textStyle14Bold,
                 ),

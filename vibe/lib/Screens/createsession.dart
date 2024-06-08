@@ -64,7 +64,7 @@ class _SessionCreateState extends State<SessionCreate> {
           ),
         ),
         titleSpacing: 0,
-        title: const Text(
+        title: Text(
           "Start Session",
           style: AppTypography.textStyle14Bold,
         ),
@@ -100,7 +100,7 @@ class _SessionCreateState extends State<SessionCreate> {
                         BorderRadius.circular(ValuesConstants.radiusSmall),
                     color: AppColor.primaryButton,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       "Upload",
                       style: AppTypography.textStyle14Bold,
@@ -111,7 +111,7 @@ class _SessionCreateState extends State<SessionCreate> {
               const SizedBox(
                 height: ValuesConstants.paddingLR,
               ),
-              const Text(
+              Text(
                 "Session Name",
                 style: AppTypography.textStyle14Bold,
               ),
@@ -136,7 +136,7 @@ class _SessionCreateState extends State<SessionCreate> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Private Session",
                     style: AppTypography.textStyle14Bold,
                   ),
@@ -169,7 +169,7 @@ class _SessionCreateState extends State<SessionCreate> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             "Invite only",
                             style: AppTypography.textStyle14Bold,
                           ),
@@ -193,7 +193,7 @@ class _SessionCreateState extends State<SessionCreate> {
                           color: AppColor.surfaceBG,
                         ),
                       ),
-                      const Text(
+                      Text(
                         "Password",
                         style: AppTypography.textStyle14Bold,
                       ),
@@ -218,7 +218,7 @@ class _SessionCreateState extends State<SessionCreate> {
                         height: ValuesConstants.paddingSmall,
                       ),
                       if (_isInvite)
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(
                               left: ValuesConstants.paddingSmall),
                           child: Text(
@@ -255,7 +255,7 @@ class _SessionCreateState extends State<SessionCreate> {
           style: const ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(AppColor.primaryButton),
           ),
-          child: const Text(
+          child: Text(
             'Create Session',
             style: AppTypography.textStyle14Bold,
           ),

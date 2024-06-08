@@ -5,6 +5,7 @@ import 'package:vibe/Screens/login.dart';
 import 'package:vibe/Styles/colors.dart';
 import 'package:vibe/Styles/typography.dart';
 import 'package:vibe/Styles/values.dart';
+import 'package:vibe/authentication/login_bl.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -38,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         BorderRadius.circular(ValuesConstants.radiusCircle),
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: ValuesConstants.paddingTB),
                   child: Text(
                     'Session name',
@@ -58,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(AppColor.surfaceFG),
                 ),
-                child: const Text(
+                child: Text(
                   'Edit Profile',
                   style: AppTypography.textStyle14Bold,
                 ),
@@ -81,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "Your Friends",
                       style: AppTypography.textStyle10Bold,
                     ),
@@ -113,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.spaceVertical,
             ),
-            const Text(
+            Text(
               "Appearance",
               style: AppTypography.textStyle14Bold,
             ),
@@ -134,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.spaceVertical,
             ),
-            const Text(
+            Text(
               "Quality",
               style: AppTypography.textStyle14Bold,
             ),
@@ -164,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.spaceVertical,
             ),
-            const Text(
+            Text(
               "Permissions",
               style: AppTypography.textStyle14Bold,
             ),
@@ -204,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.spaceVertical,
             ),
-            const Text(
+            Text(
               "About us",
               style: AppTypography.textStyle14Bold,
             ),
@@ -240,13 +241,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
+                        builder: (context) => LoginPage(),
                       ));
                 }),
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(AppColor.surfaceFG),
                 ),
-                child: const Text(
+                child: Text(
                   'Logout',
                   style: AppTypography.textStyle14Bold,
                 ),

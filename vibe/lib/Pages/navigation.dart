@@ -40,7 +40,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Vibes',
           style: AppTypography.textStyle24Bold,
         ),

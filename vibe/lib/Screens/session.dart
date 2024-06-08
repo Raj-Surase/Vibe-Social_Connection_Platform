@@ -40,14 +40,14 @@ class _SessionViewState extends State<SessionView> {
                 const SizedBox(
                   height: ValuesConstants.paddingTB,
                 ),
-                const Text(
+                Text(
                   "Session Name",
                   style: AppTypography.textStyle14Bold,
                 ),
                 const SizedBox(
                   height: ValuesConstants.paddingSmall,
                 ),
-                const Text(
+                Text(
                   "Views | Started on",
                   style: AppTypography.textStyle8Normal,
                 ),
@@ -71,7 +71,7 @@ class _SessionViewState extends State<SessionView> {
                         const SizedBox(
                           width: ValuesConstants.paddingSmall,
                         ),
-                        const Text(
+                        Text(
                           "Username",
                           style: AppTypography.textStyle10Bold,
                         ),
@@ -87,7 +87,7 @@ class _SessionViewState extends State<SessionView> {
                         backgroundColor:
                             MaterialStatePropertyAll(AppColor.surfaceFG),
                       ),
-                      child: const Text(
+                      child: Text(
                         "Add Friend",
                         style: AppTypography.textStyle10Bold,
                       ),
@@ -149,7 +149,7 @@ class _SessionViewState extends State<SessionView> {
                       cursorRadius:
                           const Radius.circular(ValuesConstants.radiusSmall),
                       cursorColor: AppColor.componentActive,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Enter your message...',
                         hintStyle: AppTypography.textStyle14Normal,
                         border: InputBorder.none,

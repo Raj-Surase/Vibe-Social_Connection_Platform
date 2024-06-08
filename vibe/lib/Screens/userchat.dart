@@ -109,7 +109,7 @@ class _UserChatState extends State<UserChat> {
                       cursorRadius:
                           const Radius.circular(ValuesConstants.radiusSmall),
                       cursorColor: AppColor.componentActive,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Enter your message...',
                         hintStyle: AppTypography.textStyle14Normal,
                         border: InputBorder.none,
