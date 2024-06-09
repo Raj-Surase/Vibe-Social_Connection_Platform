@@ -11,23 +11,23 @@ import 'package:vibe/Screens/createsession.dart';
 import 'package:vibe/Screens/userchat.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/authenticate',
+  initialLocation: '/',
   routes: [
     GoRoute(
-      path: '/authenticate',
-      builder: (context, state) => Authenticate(),
+      path: '/',
+      builder: (context, state) => const Authenticate(),
     ),
     GoRoute(
-      path: '/',
-      builder: (context, state) => LoginPage(),
+      path: '/login',
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/register',
-      builder: (context, state) => RegisterPage(),
+      builder: (context, state) => const RegisterPage(),
     ),
     GoRoute(
       path: '/create_session',
-      builder: (context, state) => SessionCreate(),
+      builder: (context, state) => const SessionCreate(),
     ),
     GoRoute(
         path: '/userchat',
@@ -48,19 +48,19 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: '/navigator/home',
-          builder: (context, state) => HomePage(),
+          builder: (context, state) => const HomePage(),
         ),
         GoRoute(
           path: '/navigator/friends',
-          builder: (context, state) => FriendsPage(),
+          builder: (context, state) => const FriendsPage(),
         ),
         GoRoute(
           path: '/navigator/notifications',
-          builder: (context, state) => NotificationPage(),
+          builder: (context, state) => const NotificationPage(),
         ),
         GoRoute(
           path: '/navigator/profile',
-          builder: (context, state) => ProfilePage(),
+          builder: (context, state) => const ProfilePage(),
         ),
       ],
     ),

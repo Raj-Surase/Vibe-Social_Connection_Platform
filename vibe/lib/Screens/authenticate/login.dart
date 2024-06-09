@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vibe/Components/auth_tf.dart';
-import 'package:vibe/Pages/navigation.dart';
 import 'package:vibe/Screens/authenticate/register.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';

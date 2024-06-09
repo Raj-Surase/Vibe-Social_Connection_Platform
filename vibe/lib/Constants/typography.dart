@@ -37,7 +37,7 @@ class AppTypography {
 
   static TextStyle textStyle14Inactive({Color? color}) {
     return GoogleFonts.montserrat(
-      color: color ?? Color.fromARGB(255, 112, 112, 112),
+      color: color ?? const Color.fromARGB(255, 112, 112, 112),
       fontSize: 14,
       fontWeight: FontWeight.w500,
     );

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vibe/Components/errordialog.dart';
-import 'package:vibe/Pages/navigation.dart';
 // import 'package:vibe/Services/auth_service.dart';
 // import 'package:vibe/Services/firebase_storage_service.dart'; // Import your Firebase Storage service
 import 'package:vibe/Constants/colors.dart';

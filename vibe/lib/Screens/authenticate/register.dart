@@ -7,7 +7,6 @@ import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:provider/provider.dart';
 import 'package:vibe/Provider/userprovider.dart';
-import 'package:vibe/Pages/navigation.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

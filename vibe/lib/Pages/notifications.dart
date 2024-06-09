@@ -7,7 +7,7 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
         padding: EdgeInsets.fromLTRB(
             ValuesConstants.paddingLR,
             ValuesConstants.paddingTB,

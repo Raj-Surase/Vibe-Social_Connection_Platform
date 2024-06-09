@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vibe/Constants/routes.dart';
-import 'package:vibe/Pages/navigation.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +11,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }

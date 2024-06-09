@@ -28,7 +28,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
       controller: widget.controller,
       obscureText: widget.isSecure,
       textInputAction: TextInputAction.next,
-      cursorRadius: Radius.circular(10),
+      cursorRadius: const Radius.circular(10),
       cursorColor: AppColor.componentActive,
       style: AppTypography.textStyle14Normal(color: AppColor.textLowEm),
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -40,7 +40,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
             AppTypography.textStyle14Inactive(color: AppColor.textHighEm),
         errorStyle:
             AppTypography.textStyle12Error(color: AppColor.componentError),
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderRadius:
               BorderRadius.all(Radius.circular(ValuesConstants.radiusSmall)),
         ),

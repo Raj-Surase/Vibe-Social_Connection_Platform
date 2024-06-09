@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vibe/Components/auhbutton.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
-import 'package:vibe/Screens/authenticate/login.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({super.key});
@@ -16,7 +17,7 @@ class _AuthenticateState extends State<Authenticate> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(
+        padding: const EdgeInsets.fromLTRB(
             ValuesConstants.paddingLR,
             ValuesConstants.paddingTB,
             ValuesConstants.paddingLR,
@@ -25,32 +26,32 @@ class _AuthenticateState extends State<Authenticate> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
+            Center(
+              child: Text(
+                "Welcome!",
+                style:
+                    AppTypography.textStyle24Bold(color: AppColor.textHighEm),
+              ),
+            ),
+            const SizedBox(
+              height: ValuesConstants.containerSmallMedium,
+            ),
+            AuthButton(
+              icon: Icons.g_mobiledata_rounded,
+              text: "Sign in with Google",
+              color: AppColor.primaryButton,
               onPressed: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.g_mobiledata_rounded,
-                    color: AppColor.textHighEm,
-                    size: 24,
-                  ),
-                  Text(
-                    "Google",
-                    style: AppTypography.textStyle14Bold(
-                        color: AppColor.textHighEm),
-                  )
-                ],
-              ),
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(AppColor.primaryButton),
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(ValuesConstants.radiusMedium),
-                  ),
-                ),
-              ),
+            ),
+            const SizedBox(
+              height: ValuesConstants.paddingTB,
+            ),
+            AuthButton(
+              icon: Icons.email_rounded,
+              text: "Sign in with Email",
+              color: AppColor.componentBorder,
+              onPressed: () {
+                context.push('/login');
+              },
             ),
           ],
         ),
