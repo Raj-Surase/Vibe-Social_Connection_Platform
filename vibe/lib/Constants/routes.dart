@@ -4,14 +4,19 @@ import 'package:vibe/Pages/home.dart';
 import 'package:vibe/Pages/navigation.dart';
 import 'package:vibe/Pages/notifications.dart';
 import 'package:vibe/Pages/profilepage.dart';
+import 'package:vibe/Screens/authenticate/authenticate.dart';
 import 'package:vibe/Screens/authenticate/login.dart';
 import 'package:vibe/Screens/authenticate/register.dart';
 import 'package:vibe/Screens/createsession.dart';
 import 'package:vibe/Screens/userchat.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/authenticate',
   routes: [
+    GoRoute(
+      path: '/authenticate',
+      builder: (context, state) => Authenticate(),
+    ),
     GoRoute(
       path: '/',
       builder: (context, state) => LoginPage(),
