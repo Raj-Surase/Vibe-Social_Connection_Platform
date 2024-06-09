@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vibe/Styles/colors.dart';
+import 'package:vibe/Constants/colors.dart';
 
 class AppTypography {
   static final TextStyle textStyle24Bold = GoogleFonts.montserrat(

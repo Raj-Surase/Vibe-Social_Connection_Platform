@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vibe/Components/usertab.dart';
 import 'package:vibe/Screens/session.dart';
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/values.dart';
 
 class SessionActivity extends StatelessWidget {
   const SessionActivity({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vibe/Components/customtextfield.dart';
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/typography.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/typography.dart';
+import 'package:vibe/Constants/values.dart';
 
 class SessionCreate extends StatefulWidget {
   const SessionCreate({super.key});

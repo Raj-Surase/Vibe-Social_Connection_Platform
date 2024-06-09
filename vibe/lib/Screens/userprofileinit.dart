@@ -6,9 +6,9 @@ import 'package:vibe/Components/errordialog.dart';
 import 'package:vibe/Pages/navigation.dart';
 // import 'package:vibe/Services/auth_service.dart';
 // import 'package:vibe/Services/firebase_storage_service.dart'; // Import your Firebase Storage service
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/typography.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/typography.dart';
+import 'package:vibe/Constants/values.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 // import 'package:vibe/models/userModel.dart';
 // import 'package:vibe/wrapper.dart';

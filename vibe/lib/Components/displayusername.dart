@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vibe/Styles/typography.dart';
+import 'package:vibe/Constants/typography.dart';
 
 class UsernameDisplayWidget extends StatelessWidget {
   const UsernameDisplayWidget({super.key});
