@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:vibe/Provider/userprovider.dart';
 import 'package:vibe/Screens/authenticate/authenticate.dart';
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/typography.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/typography.dart';
+import 'package:vibe/Constants/values.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -39,6 +42,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
@@ -509,12 +514,8 @@ class _ProfilePageState extends State<ProfilePage> {
               height: ValuesConstants.containerSmallMedium,
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Authenticate(),
-                    ),
-                  );
+                  userProvider.logout();
+                  context.go('/');
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(AppColor.surfaceFG),

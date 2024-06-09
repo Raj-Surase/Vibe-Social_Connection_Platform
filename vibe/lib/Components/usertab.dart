@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vibe/Screens/userchat.dart';
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/typography.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/typography.dart';
+import 'package:vibe/Constants/values.dart';
 
 class UserTab extends StatefulWidget {
   const UserTab({
@@ -26,14 +27,7 @@ class _UserTabState extends State<UserTab> {
     return InkWell(
       onTap: () {
         if (widget.isClickable) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => UserChat(
-                title: widget.title,
-              ),
-            ),
-          );
+          context.push('/userchat', extra: widget.title);
         }
       },
       child: Row(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vibe/Components/auth_tf.dart';
 import 'package:vibe/Screens/authenticate/login.dart';
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/typography.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/typography.dart';
+import 'package:vibe/Constants/values.dart';
 import 'package:provider/provider.dart';
 import 'package:vibe/Provider/userprovider.dart';
 import 'package:vibe/Pages/navigation.dart';
@@ -127,10 +128,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (username.isNotEmpty) {
                     Provider.of<UserProvider>(context, listen: false)
                         .login(username);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => NavigatorPage()),
-                    );
+                    context.go(
+                        '/navigator/home'); // Navigate to the home page within the navigator
                   }
                 },
                 style: ButtonStyle(

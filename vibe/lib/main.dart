@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Pages/navigation.dart';
-import 'package:vibe/Styles/colors.dart';
+import 'package:vibe/Constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'Provider/userprovider.dart';
@@ -9,7 +10,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    const MyApp(),
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MyApp(),
+    ),
   );
 }
 
@@ -27,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.light,
@@ -45,7 +49,9 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         themeMode: ThemeMode.light,
-        home: const NavigatorPage(),
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
       ),
     );
   }

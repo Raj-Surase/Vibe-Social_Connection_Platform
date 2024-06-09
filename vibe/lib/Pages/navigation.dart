@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
-import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
-import 'package:vibe/Pages/friendspage.dart';
-
-import 'package:vibe/Pages/home.dart';
-import 'package:vibe/Pages/notifications.dart';
-import 'package:vibe/Pages/profilepage.dart';
-import 'package:vibe/Screens/createsession.dart';
-import 'package:vibe/Styles/colors.dart';
-import 'package:vibe/Styles/typography.dart';
-import 'package:vibe/Styles/values.dart';
-
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
+import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/typography.dart';
+import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Provider/userprovider.dart';
 
 class NavigatorPage extends StatefulWidget {
-  const NavigatorPage({super.key});
+  final Widget child;
+  const NavigatorPage({super.key, required this.child});
 
   @override
   State<NavigatorPage> createState() => _NavigatorPageState();
 }
 
 class _NavigatorPageState extends State<NavigatorPage> {
-  late PageController _pageController;
   int selectedIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: selectedIndex);
-  }
 
   void onButtonPressed(int index) {
     setState(() {
       selectedIndex = index;
     });
-    _pageController.animateToPage(selectedIndex,
-        duration: const Duration(milliseconds: 400), curve: Curves.easeOutQuad);
+
+    switch (selectedIndex) {
+      case 0:
+        context.pushReplacement('/navigator/home');
+        break;
+      case 1:
+        context.pushReplacement('/navigator/friends');
+        break;
+      case 2:
+        context.pushReplacement('/navigator/notifications');
+        break;
+      case 3:
+        context.pushReplacement('/navigator/profile');
+        break;
+    }
   }
 
   @override
@@ -50,17 +50,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           style: AppTypography.textStyle24Bold,
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              children: _listOfWidget,
-            ),
-          ),
-        ],
-      ),
+      body: widget.child,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Visibility(
         visible: selectedIndex == 0,
@@ -75,12 +65,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           ),
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SessionCreate(),
-                ),
-              );
+              context.push('/create_session');
             },
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -122,10 +107,3 @@ class _NavigatorPageState extends State<NavigatorPage> {
     );
   }
 }
-
-List<Widget> _listOfWidget = <Widget>[
-  const HomePage(),
-  const FriendsPage(),
-  const NotificationPage(),
-  const ProfilePage()
-];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vibe/Components/usertab.dart';
-import 'package:vibe/Styles/values.dart';
+import 'package:vibe/Constants/values.dart';
 
 class FriendsPage extends StatelessWidget {
   const FriendsPage({super.key});
