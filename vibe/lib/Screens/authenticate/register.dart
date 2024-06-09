@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vibe/Components/auth_tf.dart';
 import 'package:vibe/Screens/authenticate/login.dart';
-// import 'package:vibe/Services/auth_service.dart';
-// import 'package:vibe/Services/database_service.dart';
 import 'package:vibe/Styles/colors.dart';
 import 'package:vibe/Styles/typography.dart';
 import 'package:vibe/Styles/values.dart';
-// import 'package:vibe/models/userModel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/Pages/navigation.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -17,6 +16,26 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  late TextEditingController usernamecontroller;
+  late TextEditingController passwordcontroller;
+  late TextEditingController confirmpasswordcontroller;
+
+  @override
+  void initState() {
+    super.initState();
+    usernamecontroller = TextEditingController();
+    passwordcontroller = TextEditingController();
+    confirmpasswordcontroller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    usernamecontroller.dispose();
+    passwordcontroller.dispose();
+    confirmpasswordcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +69,10 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            AuthTextField(hintText: "Email Address", isSecure: true),
+            AuthTextField(
+                hintText: "Email Address",
+                controller: usernamecontroller,
+                isSecure: true),
 
             const SizedBox(
               height: ValuesConstants.paddingTB,
@@ -62,7 +84,10 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            AuthTextField(hintText: "Password", isSecure: true),
+            AuthTextField(
+                hintText: "Password",
+                controller: passwordcontroller,
+                isSecure: true),
             const SizedBox(
               height: ValuesConstants.paddingTB,
             ),
@@ -73,7 +98,10 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            AuthTextField(hintText: "Confirm Password", isSecure: true),
+            AuthTextField(
+                hintText: "Confirm Password",
+                controller: confirmpasswordcontroller,
+                isSecure: true),
             TextButton(
               onPressed: (() {
                 Navigator.pushReplacement(
@@ -94,7 +122,17 @@ class _RegisterPageState extends State<RegisterPage> {
               width: ValuesConstants.screenWidth(context),
               height: ValuesConstants.containerSmallMedium,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  final username = usernamecontroller.text;
+                  if (username.isNotEmpty) {
+                    Provider.of<UserProvider>(context, listen: false)
+                        .login(username);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => NavigatorPage()),
+                    );
+                  }
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       WidgetStatePropertyAll(AppColor.primaryButton),

@@ -7,12 +7,14 @@ class AuthTextField extends StatefulWidget {
   const AuthTextField({
     required this.hintText,
     required this.isSecure,
+    required this.controller,
     this.isEnabled,
     super.key,
   });
 
   final String hintText;
   final bool? isEnabled;
+  final TextEditingController controller;
   final bool isSecure;
 
   @override
@@ -20,24 +22,10 @@ class AuthTextField extends StatefulWidget {
 }
 
 class _AuthTextFieldState extends State<AuthTextField> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller,
+      controller: widget.controller,
       obscureText: widget.isSecure,
       textInputAction: TextInputAction.next,
       cursorRadius: Radius.circular(10),
