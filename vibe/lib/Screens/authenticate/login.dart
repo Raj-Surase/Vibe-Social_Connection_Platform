@@ -46,7 +46,8 @@ class _LoginPageState extends State<LoginPage> {
             Center(
               child: Text(
                 "Login",
-                style: AppTypography.textStyle24Bold,
+                style:
+                    AppTypography.textStyle24Bold(color: AppColor.textHighEm),
               ),
             ),
             const SizedBox(
@@ -54,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               "Email",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               "Password",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -87,7 +88,8 @@ class _LoginPageState extends State<LoginPage> {
               }),
               child: Text(
                 "Don't have an account? Sign up.",
-                style: AppTypography.textStyle10Link,
+                style: AppTypography.textStyle10Link(
+                    color: AppColor.primaryButton),
               ),
             ),
             const SizedBox(
@@ -112,7 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: Text(
                   'Login',
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
               ),
             ),

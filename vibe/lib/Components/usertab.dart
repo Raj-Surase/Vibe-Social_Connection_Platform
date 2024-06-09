@@ -48,11 +48,13 @@ class _UserTabState extends State<UserTab> {
               children: [
                 Text(
                   widget.title,
-                  style: AppTypography.textStyle10Bold,
+                  style:
+                      AppTypography.textStyle10Bold(color: AppColor.textHighEm),
                 ),
                 Text(
                   widget.subtitle,
-                  style: AppTypography.textStyle8Normal,
+                  style:
+                      AppTypography.textStyle8Normal(color: AppColor.textLowEm),
                 ),
               ],
             ),

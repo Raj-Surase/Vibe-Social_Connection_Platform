@@ -85,7 +85,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       const EdgeInsets.only(left: ValuesConstants.paddingTB),
                   child: Text(
                     'Session name',
-                    style: AppTypography.textStyle14Bold,
+                    style: AppTypography.textStyle14Bold(
+                        color: AppColor.textHighEm),
                   ),
                 ),
               ],
@@ -103,7 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: Text(
                   'Edit Profile',
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
               ),
             ),
@@ -126,7 +128,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Text(
                       "Your Friends",
-                      style: AppTypography.textStyle10Bold,
+                      style: AppTypography.textStyle10Bold(
+                          color: AppColor.textHighEm),
                     ),
                     Row(
                       children: [
@@ -198,7 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Text(
               "Appearance",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -231,7 +234,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         "Theme",
-                        style: AppTypography.textStyle10Bold,
+                        style: AppTypography.textStyle10Bold(
+                            color: AppColor.textHighEm),
                       ),
                     ],
                   ),
@@ -243,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Text(
               "Quality",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -281,13 +285,15 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               Text(
                                 "Video Quality",
-                                style: AppTypography.textStyle10Bold,
+                                style: AppTypography.textStyle10Bold(
+                                    color: AppColor.textHighEm),
                               ),
                             ],
                           ),
                           Text(
                             "High",
-                            style: AppTypography.textStyle10Bold,
+                            style: AppTypography.textStyle10Bold(
+                                color: AppColor.textHighEm),
                           ),
                         ],
                       ),
@@ -314,13 +320,15 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Text(
                               "Audio Quality",
-                              style: AppTypography.textStyle10Bold,
+                              style: AppTypography.textStyle10Bold(
+                                  color: AppColor.textHighEm),
                             ),
                           ],
                         ),
                         Text(
                           "High",
-                          style: AppTypography.textStyle10Bold,
+                          style: AppTypography.textStyle10Bold(
+                              color: AppColor.textHighEm),
                         ),
                       ],
                     ),
@@ -333,7 +341,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Text(
               "Permissions",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -371,7 +379,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               Text(
                                 "Camera",
-                                style: AppTypography.textStyle10Bold,
+                                style: AppTypography.textStyle10Bold(
+                                    color: AppColor.textHighEm),
                               ),
                             ],
                           ),
@@ -412,7 +421,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Text(
                               "Microphone",
-                              style: AppTypography.textStyle10Bold,
+                              style: AppTypography.textStyle10Bold(
+                                  color: AppColor.textHighEm),
                             ),
                           ],
                         ),
@@ -439,7 +449,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Text(
               "About us",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -474,7 +484,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Text(
                             "Help",
-                            style: AppTypography.textStyle10Bold,
+                            style: AppTypography.textStyle10Bold(
+                                color: AppColor.textHighEm),
                           ),
                         ],
                       ),
@@ -498,7 +509,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Text(
                           "About",
-                          style: AppTypography.textStyle10Bold,
+                          style: AppTypography.textStyle10Bold(
+                              color: AppColor.textHighEm),
                         ),
                       ],
                     ),
@@ -522,7 +534,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: Text(
                   'Logout',
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
               ),
             ),

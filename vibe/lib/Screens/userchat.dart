@@ -51,7 +51,7 @@ class _UserChatState extends State<UserChat> {
         titleSpacing: 0,
         title: Text(
           widget.title,
-          style: AppTypography.textStyle14Bold,
+          style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
         ),
       ),
       body: Padding(
@@ -84,7 +84,8 @@ class _UserChatState extends State<UserChat> {
                       ),
                       Text(
                         messages[index].toString(),
-                        style: AppTypography.textStyle10Bold,
+                        style: AppTypography.textStyle10Bold(
+                            color: AppColor.textHighEm),
                       ),
                     ],
                   );
@@ -105,13 +106,15 @@ class _UserChatState extends State<UserChat> {
                         right: ValuesConstants.paddingTB),
                     child: TextField(
                       controller: _messageController,
-                      style: AppTypography.textStyle14Bold,
+                      style: AppTypography.textStyle14Bold(
+                          color: AppColor.textHighEm),
                       cursorRadius:
                           const Radius.circular(ValuesConstants.radiusSmall),
                       cursorColor: AppColor.componentActive,
                       decoration: InputDecoration(
                         hintText: 'Enter your message...',
-                        hintStyle: AppTypography.textStyle14Normal,
+                        hintStyle: AppTypography.textStyle14Normal(
+                            color: AppColor.textLowEm),
                         border: InputBorder.none,
 
                         // fillColor: AppColor.surfaceFG,

@@ -32,13 +32,14 @@ class ErrorDialogBox extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTypography.textStyle14Error,
+              style: AppTypography.textStyle14Error(
+                  color: AppColor.componentError),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: ValuesConstants.paddingTB),
             Text(
               description,
-              style: AppTypography.textStyle10Bold,
+              style: AppTypography.textStyle10Bold(color: AppColor.textHighEm),
               textAlign: TextAlign.left,
             ),
             const SizedBox(height: ValuesConstants.paddingLR),
@@ -56,7 +57,9 @@ class ErrorDialogBox extends StatelessWidget {
                       BorderRadius.circular(ValuesConstants.radiusSmall),
                 ),
               ),
-              child: Text('Okay', style: AppTypography.textStyle14Bold),
+              child: Text('Okay',
+                  style: AppTypography.textStyle14Bold(
+                      color: AppColor.textHighEm)),
             ),
           ],
         ),

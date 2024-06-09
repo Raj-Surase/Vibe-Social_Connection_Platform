@@ -37,7 +37,8 @@ class _AuthenticateState extends State<Authenticate> {
                   ),
                   Text(
                     "Google",
-                    style: AppTypography.textStyle14Bold,
+                    style: AppTypography.textStyle14Bold(
+                        color: AppColor.textHighEm),
                   )
                 ],
               ),

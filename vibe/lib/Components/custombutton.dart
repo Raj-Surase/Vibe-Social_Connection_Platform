@@ -40,11 +40,13 @@ class CustomButton extends StatelessWidget {
               children: [
                 Text(
                   buttonText,
-                  style: AppTypography.textStyle10Bold,
+                  style:
+                      AppTypography.textStyle10Bold(color: AppColor.textHighEm),
                 ),
                 Text(
                   alternativeText!,
-                  style: AppTypography.textStyle10Bold,
+                  style:
+                      AppTypography.textStyle10Bold(color: AppColor.textHighEm),
                 ),
               ],
             ),
@@ -64,11 +66,13 @@ class CustomButton extends StatelessWidget {
             children: [
               Text(
                 buttonText2!,
-                style: AppTypography.textStyle10Bold,
+                style:
+                    AppTypography.textStyle10Bold(color: AppColor.textHighEm),
               ),
               Text(
                 alternativeText2!,
-                style: AppTypography.textStyle10Bold,
+                style:
+                    AppTypography.textStyle10Bold(color: AppColor.textHighEm),
               ),
             ],
           ),

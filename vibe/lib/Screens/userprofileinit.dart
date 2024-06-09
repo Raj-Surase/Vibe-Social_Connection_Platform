@@ -125,7 +125,7 @@ class _UserProfileInitState extends State<UserProfileInit> {
           children: [
             Text(
               "Create your Profile",
-              style: AppTypography.textStyle24Bold,
+              style: AppTypography.textStyle24Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingLR,
@@ -147,7 +147,8 @@ class _UserProfileInitState extends State<UserProfileInit> {
                       child: Center(
                           child: Text(
                         "Upload",
-                        style: AppTypography.textStyle14Bold,
+                        style: AppTypography.textStyle14Bold(
+                            color: AppColor.textHighEm),
                       )),
                     )
                   : Container(
@@ -176,7 +177,8 @@ class _UserProfileInitState extends State<UserProfileInit> {
               children: [
                 Text(
                   "Username",
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
                 const SizedBox(
                   height: ValuesConstants.paddingSmall,
@@ -193,14 +195,16 @@ class _UserProfileInitState extends State<UserProfileInit> {
                       right: ValuesConstants.paddingTB),
                   child: TextFormField(
                     // controller: _userConfirmPassController,
-                    style: AppTypography.textStyle14Bold,
+                    style: AppTypography.textStyle14Bold(
+                        color: AppColor.textHighEm),
                     enabled: true,
                     cursorRadius:
                         const Radius.circular(ValuesConstants.radiusSmall),
                     cursorColor: AppColor.componentActive,
                     decoration: InputDecoration(
                       hintText: "Username",
-                      hintStyle: AppTypography.textStyle14Inactive,
+                      hintStyle: AppTypography.textStyle14Inactive(
+                          color: AppColor.textLowEm),
                       disabledBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       // fillColor: AppColor.surfaceFG,
@@ -286,7 +290,8 @@ class _UserProfileInitState extends State<UserProfileInit> {
                 ),
                 child: Text(
                   'Continue',
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
               ),
             ),

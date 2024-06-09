@@ -24,13 +24,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.textFieldController,
-      style: AppTypography.textStyle14Bold,
+      style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
       enabled: widget.isEnabled,
       cursorRadius: const Radius.circular(ValuesConstants.radiusSmall),
       cursorColor: AppColor.componentActive,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: AppTypography.textStyle14Inactive,
+        hintStyle: AppTypography.textStyle14Inactive(color: AppColor.textLowEm),
         disabledBorder: InputBorder.none,
         enabledBorder: InputBorder.none,
         // fillColor: AppColor.surfaceFG,

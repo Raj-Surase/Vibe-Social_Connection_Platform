@@ -56,7 +56,8 @@ class _RegisterPageState extends State<RegisterPage> {
             Center(
               child: Text(
                 "Register",
-                style: AppTypography.textStyle24Bold,
+                style:
+                    AppTypography.textStyle24Bold(color: AppColor.textHighEm),
               ),
             ),
             const SizedBox(
@@ -65,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
             Text(
               "Email id",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -80,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Text(
               "Password",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -94,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Text(
               "Confirm Password",
-              style: AppTypography.textStyle14Bold,
+              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
             ),
             const SizedBox(
               height: ValuesConstants.paddingSmall,
@@ -113,7 +114,8 @@ class _RegisterPageState extends State<RegisterPage> {
               }),
               child: Text(
                 "Already have an account? Sign in.",
-                style: AppTypography.textStyle10Link,
+                style:
+                    AppTypography.textStyle10Link(color: AppColor.textHighEm),
               ),
             ),
             const SizedBox(
@@ -138,7 +140,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 child: Text(
                   'Register',
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
               ),
             ),

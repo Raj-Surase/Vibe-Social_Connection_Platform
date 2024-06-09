@@ -47,7 +47,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
       appBar: AppBar(
         title: Text(
           'Vibes',
-          style: AppTypography.textStyle24Bold,
+          style: AppTypography.textStyle24Bold(color: AppColor.textHighEm),
         ),
       ),
       body: widget.child,

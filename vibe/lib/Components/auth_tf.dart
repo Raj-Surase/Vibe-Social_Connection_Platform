@@ -30,14 +30,16 @@ class _AuthTextFieldState extends State<AuthTextField> {
       textInputAction: TextInputAction.next,
       cursorRadius: Radius.circular(10),
       cursorColor: AppColor.componentActive,
-      style: AppTypography.textStyle14Normal,
+      style: AppTypography.textStyle14Normal(color: AppColor.textLowEm),
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
       decoration: InputDecoration(
         labelText: widget.hintText,
         fillColor: AppColor.surfaceFG,
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelStyle: AppTypography.textStyle14Inactive,
-        errorStyle: AppTypography.textStyle12Error,
+        labelStyle:
+            AppTypography.textStyle14Inactive(color: AppColor.textHighEm),
+        errorStyle:
+            AppTypography.textStyle12Error(color: AppColor.componentError),
         border: OutlineInputBorder(
           borderRadius:
               BorderRadius.all(Radius.circular(ValuesConstants.radiusSmall)),

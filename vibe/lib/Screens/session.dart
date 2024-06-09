@@ -42,14 +42,16 @@ class _SessionViewState extends State<SessionView> {
                 ),
                 Text(
                   "Session Name",
-                  style: AppTypography.textStyle14Bold,
+                  style:
+                      AppTypography.textStyle14Bold(color: AppColor.textHighEm),
                 ),
                 const SizedBox(
                   height: ValuesConstants.paddingSmall,
                 ),
                 Text(
                   "Views | Started on",
-                  style: AppTypography.textStyle8Normal,
+                  style: AppTypography.textStyle8Normal(
+                      color: AppColor.textHighEm),
                 ),
                 const SizedBox(
                   height: ValuesConstants.paddingTB,
@@ -73,7 +75,8 @@ class _SessionViewState extends State<SessionView> {
                         ),
                         Text(
                           "Username",
-                          style: AppTypography.textStyle10Bold,
+                          style: AppTypography.textStyle10Bold(
+                              color: AppColor.textHighEm),
                         ),
                       ],
                     ),
@@ -89,7 +92,8 @@ class _SessionViewState extends State<SessionView> {
                       ),
                       child: Text(
                         "Add Friend",
-                        style: AppTypography.textStyle10Bold,
+                        style: AppTypography.textStyle10Bold(
+                            color: AppColor.textHighEm),
                       ),
                     ),
                   ],
@@ -123,7 +127,8 @@ class _SessionViewState extends State<SessionView> {
                         ),
                         Text(
                           messages[index].toString(),
-                          style: AppTypography.textStyle10Bold,
+                          style: AppTypography.textStyle10Bold(
+                              color: AppColor.textHighEm),
                         ),
                       ],
                     );
@@ -145,13 +150,15 @@ class _SessionViewState extends State<SessionView> {
                         right: ValuesConstants.paddingTB),
                     child: TextField(
                       controller: _messageController,
-                      style: AppTypography.textStyle14Bold,
+                      style: AppTypography.textStyle14Bold(
+                          color: AppColor.textHighEm),
                       cursorRadius:
                           const Radius.circular(ValuesConstants.radiusSmall),
                       cursorColor: AppColor.componentActive,
                       decoration: InputDecoration(
                         hintText: 'Enter your message...',
-                        hintStyle: AppTypography.textStyle14Normal,
+                        hintStyle: AppTypography.textStyle14Normal(
+                            color: AppColor.textHighEm),
                         border: InputBorder.none,
 
                         // fillColor: AppColor.surfaceFG,

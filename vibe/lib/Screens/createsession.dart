@@ -67,7 +67,7 @@ class _SessionCreateState extends State<SessionCreate> {
         titleSpacing: 0,
         title: Text(
           "Start Session",
-          style: AppTypography.textStyle14Bold,
+          style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
         ),
       ),
       body: SingleChildScrollView(
@@ -104,7 +104,8 @@ class _SessionCreateState extends State<SessionCreate> {
                   child: Center(
                     child: Text(
                       "Upload",
-                      style: AppTypography.textStyle14Bold,
+                      style: AppTypography.textStyle14Bold(
+                          color: AppColor.textHighEm),
                     ),
                   ),
                 ),
@@ -114,7 +115,8 @@ class _SessionCreateState extends State<SessionCreate> {
               ),
               Text(
                 "Session Name",
-                style: AppTypography.textStyle14Bold,
+                style:
+                    AppTypography.textStyle14Bold(color: AppColor.textHighEm),
               ),
               const SizedBox(
                 height: ValuesConstants.paddingSmall,
@@ -139,7 +141,8 @@ class _SessionCreateState extends State<SessionCreate> {
                 children: [
                   Text(
                     "Private Session",
-                    style: AppTypography.textStyle14Bold,
+                    style: AppTypography.textStyle14Bold(
+                        color: AppColor.textHighEm),
                   ),
                   SizedBox(
                     height: ValuesConstants.iconSize,
@@ -172,7 +175,8 @@ class _SessionCreateState extends State<SessionCreate> {
                         children: [
                           Text(
                             "Invite only",
-                            style: AppTypography.textStyle14Bold,
+                            style: AppTypography.textStyle14Bold(
+                                color: AppColor.textHighEm),
                           ),
                           SizedBox(
                             height: ValuesConstants.iconSize,
@@ -197,7 +201,8 @@ class _SessionCreateState extends State<SessionCreate> {
                       ),
                       Text(
                         "Password",
-                        style: AppTypography.textStyle14Bold,
+                        style: AppTypography.textStyle14Bold(
+                            color: AppColor.textHighEm),
                       ),
                       const SizedBox(
                         height: ValuesConstants.paddingSmall,
@@ -225,7 +230,8 @@ class _SessionCreateState extends State<SessionCreate> {
                               left: ValuesConstants.paddingSmall),
                           child: Text(
                             "The Session is invite only! You can only use password is  session is not invite only.",
-                            style: AppTypography.textStyle8Normal,
+                            style: AppTypography.textStyle8Normal(
+                                color: AppColor.textHighEm),
                           ),
                         ),
                     ],
@@ -259,7 +265,7 @@ class _SessionCreateState extends State<SessionCreate> {
           ),
           child: Text(
             'Create Session',
-            style: AppTypography.textStyle14Bold,
+            style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
           ),
         ),
       ),
