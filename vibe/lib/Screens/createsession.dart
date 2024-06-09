@@ -18,10 +18,10 @@ class _SessionCreateState extends State<SessionCreate> {
   late bool _isPrivate = false;
   late bool _isInvite = false;
 
-  final MaterialStateProperty<Icon?> thumbIcon =
-      MaterialStateProperty.resolveWith<Icon?>(
-    (Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
+  final WidgetStateProperty<Icon?> thumbIcon =
+      WidgetStateProperty.resolveWith<Icon?>(
+    (Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return const Icon(
           Icons.check,
           size: ValuesConstants.iconSize,
@@ -57,7 +57,7 @@ class _SessionCreateState extends State<SessionCreate> {
           onPressed: (() {
             Navigator.pop(context);
           }),
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             color: AppColor.textHighEm,
             size: ValuesConstants.iconSize,
@@ -187,8 +187,9 @@ class _SessionCreateState extends State<SessionCreate> {
                           ),
                         ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(ValuesConstants.paddingSmall),
+                      Padding(
+                        padding:
+                            const EdgeInsets.all(ValuesConstants.paddingSmall),
                         child: Divider(
                           color: AppColor.surfaceBG,
                         ),
@@ -219,7 +220,7 @@ class _SessionCreateState extends State<SessionCreate> {
                       ),
                       if (_isInvite)
                         Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                               left: ValuesConstants.paddingSmall),
                           child: Text(
                             "The Session is invite only! You can only use password is  session is not invite only.",
@@ -252,8 +253,8 @@ class _SessionCreateState extends State<SessionCreate> {
               _isPrivate = false;
             });
           },
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(AppColor.primaryButton),
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(AppColor.primaryButton),
           ),
           child: Text(
             'Create Session',

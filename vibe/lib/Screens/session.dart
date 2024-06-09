@@ -79,13 +79,13 @@ class _SessionViewState extends State<SessionView> {
                     ),
                     TextButton(
                       onPressed: (() {}),
-                      style: const ButtonStyle(
-                        fixedSize: MaterialStatePropertyAll(
+                      style: ButtonStyle(
+                        fixedSize: const WidgetStatePropertyAll(
                           Size(ValuesConstants.containerMediumLarge,
                               ValuesConstants.containerSmall),
                         ),
                         backgroundColor:
-                            MaterialStatePropertyAll(AppColor.surfaceFG),
+                            WidgetStatePropertyAll(AppColor.surfaceFG),
                       ),
                       child: Text(
                         "Add Friend",
@@ -163,7 +163,7 @@ class _SessionViewState extends State<SessionView> {
                 const SizedBox(width: ValuesConstants.paddingSmall),
                 IconButton(
                   onPressed: (() {}),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.send_rounded,
                     color: AppColor.componentActive,
                     size: ValuesConstants.paddingLR,

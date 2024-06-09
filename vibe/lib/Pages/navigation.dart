@@ -79,7 +79,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
             },
             backgroundColor: Colors.transparent,
             elevation: 0,
-            child: const Icon(
+            child: Icon(
               Icons.add_rounded,
               color: AppColor.componentActive,
               size: ValuesConstants.iconSize,
@@ -119,7 +119,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
 }
 
 List<Widget> _listOfWidget = <Widget>[
-  HomePage(),
+  const HomePage(),
   const FriendsPage(),
   const NotificationPage(),
   const ProfilePage()

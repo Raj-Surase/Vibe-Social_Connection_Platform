@@ -28,7 +28,7 @@ class _UserChatState extends State<UserChat> {
           }),
           icon: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.arrow_back_ios_new_rounded,
                 color: AppColor.textHighEm,
                 size: ValuesConstants.iconSize,
@@ -123,7 +123,7 @@ class _UserChatState extends State<UserChat> {
                 const SizedBox(width: ValuesConstants.paddingSmall),
                 IconButton(
                   onPressed: (() {}),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.send_rounded,
                     color: AppColor.componentActive,
                     size: ValuesConstants.paddingLR,

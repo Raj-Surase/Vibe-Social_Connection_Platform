@@ -51,8 +51,8 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         if (buttonText2 != null)
-          const Padding(
-            padding: EdgeInsets.all(ValuesConstants.paddingSmall),
+          Padding(
+            padding: const EdgeInsets.all(ValuesConstants.paddingSmall),
             child: Divider(
               color: AppColor.surfaceBG,
             ),

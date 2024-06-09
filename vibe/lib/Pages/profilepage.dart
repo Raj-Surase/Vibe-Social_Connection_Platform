@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vibe/Components/custombuttonwidget.dart';
-import 'package:vibe/Components/profileimage.dart';
-import 'package:vibe/Screens/login.dart';
+import 'package:vibe/Screens/authenticate/authenticate.dart';
 import 'package:vibe/Styles/colors.dart';
 import 'package:vibe/Styles/typography.dart';
 import 'package:vibe/Styles/values.dart';
-import 'package:vibe/authentication/login_bl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -15,6 +13,30 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late bool light = false;
+  late bool light1 = false;
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  String imageUrl = "";
+  bool isLoading = true;
+
+  final WidgetStateProperty<Icon?> thumbIcon =
+      WidgetStateProperty.resolveWith<Icon?>(
+    (Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
+        return const Icon(
+          Icons.check,
+          size: ValuesConstants.iconSize,
+        );
+      }
+      return const Icon(
+        Icons.close,
+        size: ValuesConstants.iconSize,
+      );
+    },
+  );
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,17 +52,32 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: ValuesConstants.containerMedium,
-                  width: ValuesConstants.containerMedium,
-                  decoration: BoxDecoration(
-                    color: AppColor.surfaceFG,
-                    borderRadius:
-                        BorderRadius.circular(ValuesConstants.radiusCircle),
+                if (isLoading)
+                  SizedBox(
+                    height: ValuesConstants.containerMedium,
+                    width: ValuesConstants.containerMedium,
+                    child: Padding(
+                      padding: const EdgeInsets.all(ValuesConstants.paddingTB),
+                      child: CircularProgressIndicator(
+                        backgroundColor: AppColor.surfaceFG,
+                        color: AppColor.componentActive,
+                      ),
+                    ),
+                  )
+                else
+                  Container(
+                    height: ValuesConstants.containerMedium,
+                    width: ValuesConstants.containerMedium,
+                    decoration: BoxDecoration(
+                      color: AppColor.surfaceFG,
+                      borderRadius:
+                          BorderRadius.circular(ValuesConstants.radiusCircle),
+                      image: DecorationImage(image: NetworkImage(imageUrl)),
+                    ),
                   ),
-                ),
                 Padding(
-                  padding: EdgeInsets.only(left: ValuesConstants.paddingTB),
+                  padding:
+                      const EdgeInsets.only(left: ValuesConstants.paddingTB),
                   child: Text(
                     'Session name',
                     style: AppTypography.textStyle14Bold,
@@ -56,8 +93,8 @@ class _ProfilePageState extends State<ProfilePage> {
               width: ValuesConstants.screenWidth(context),
               child: TextButton(
                 onPressed: (() {}),
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColor.surfaceFG),
+                style: ButtonStyle(
+                  backgroundColor: WidgetStatePropertyAll(AppColor.surfaceFG),
                 ),
                 child: Text(
                   'Edit Profile',
@@ -88,23 +125,63 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Row(
                       children: [
-                        ProfileImage(),
+                        Container(
+                          height: ValuesConstants.containerSmall,
+                          width: ValuesConstants.containerSmall,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                            color: AppColor.surfaceBG,
+                          ),
+                        ),
                         const SizedBox(
                           width: ValuesConstants.paddingSmall,
                         ),
-                        ProfileImage(),
+                        Container(
+                          height: ValuesConstants.containerSmall,
+                          width: ValuesConstants.containerSmall,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                            color: AppColor.surfaceBG,
+                          ),
+                        ),
                         const SizedBox(
                           width: ValuesConstants.paddingSmall,
                         ),
-                        ProfileImage(),
+                        Container(
+                          height: ValuesConstants.containerSmall,
+                          width: ValuesConstants.containerSmall,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                            color: AppColor.surfaceBG,
+                          ),
+                        ),
                         const SizedBox(
                           width: ValuesConstants.paddingSmall,
                         ),
-                        ProfileImage(),
+                        Container(
+                          height: ValuesConstants.containerSmall,
+                          width: ValuesConstants.containerSmall,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                            color: AppColor.surfaceBG,
+                          ),
+                        ),
                         const SizedBox(
                           width: ValuesConstants.paddingSmall,
                         ),
-                        ProfileImage(),
+                        Container(
+                          height: ValuesConstants.containerSmall,
+                          width: ValuesConstants.containerSmall,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                            color: AppColor.surfaceBG,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -121,16 +198,40 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            CustomButtonWidget(
-              buttons: [
-                ButtonData(
-                  icon: Icons.mode_night_rounded,
-                  text: 'Theme',
-                  onTap: () {
-                    // Handle tap
-                  },
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: ValuesConstants.screenWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(ValuesConstants.radiusLarge),
+                  color: AppColor.surfaceFG,
                 ),
-              ],
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                      ValuesConstants.paddingLR,
+                      ValuesConstants.paddingTB,
+                      ValuesConstants.paddingLR,
+                      ValuesConstants.paddingTB),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.nightlight_round,
+                        color: AppColor.textHighEm,
+                        size: ValuesConstants.iconSize,
+                      ),
+                      const SizedBox(
+                        width: ValuesConstants.paddingSmall,
+                      ),
+                      Text(
+                        "Theme",
+                        style: AppTypography.textStyle10Bold,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: ValuesConstants.spaceVertical,
@@ -142,25 +243,85 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            CustomButtonWidget(
-              buttons: [
-                ButtonData(
-                  icon: Icons.videocam_rounded,
-                  text: 'Video Quality',
-                  trailingText: 'High',
-                  onTap: () {
-                    // Handle tap
-                  },
+            Container(
+              width: ValuesConstants.screenWidth(context),
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(ValuesConstants.radiusLarge),
+                color: AppColor.surfaceFG,
+              ),
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    ValuesConstants.paddingLR,
+                    ValuesConstants.paddingTB,
+                    ValuesConstants.paddingLR,
+                    ValuesConstants.paddingTB),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.videocam_rounded,
+                                color: AppColor.textHighEm,
+                                size: ValuesConstants.iconSize,
+                              ),
+                              const SizedBox(
+                                width: ValuesConstants.paddingSmall,
+                              ),
+                              Text(
+                                "Video Quality",
+                                style: AppTypography.textStyle10Bold,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "High",
+                            style: AppTypography.textStyle10Bold,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.all(ValuesConstants.paddingSmall),
+                      child: Divider(
+                        color: AppColor.componentBorder,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.volume_down_rounded,
+                              color: AppColor.textHighEm,
+                              size: ValuesConstants.iconSize,
+                            ),
+                            const SizedBox(
+                              width: ValuesConstants.paddingSmall,
+                            ),
+                            Text(
+                              "Audio Quality",
+                              style: AppTypography.textStyle10Bold,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "High",
+                          style: AppTypography.textStyle10Bold,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                ButtonData(
-                  icon: Icons.volume_down_rounded,
-                  text: 'Audio Quality',
-                  trailingText: 'Low',
-                  onTap: () {
-                    // Handle tap
-                  },
-                ),
-              ],
+              ),
             ),
             const SizedBox(
               height: ValuesConstants.spaceVertical,
@@ -172,35 +333,101 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            CustomButtonWidget(
-              buttons: [
-                ButtonData(
-                  icon: Icons.camera_alt_rounded,
-                  text: 'Camera',
-                  trailingSwitch: CustomSwitch(
-                    initialValue: true,
-                    onChanged: (value) {
-                      // Handle toggle
-                    },
-                  ),
-                  onTap: () {
-                    // Handle tap
-                  },
+            Container(
+              width: ValuesConstants.screenWidth(context),
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(ValuesConstants.radiusLarge),
+                color: AppColor.surfaceFG,
+              ),
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    ValuesConstants.paddingLR,
+                    ValuesConstants.paddingTB,
+                    ValuesConstants.paddingLR,
+                    ValuesConstants.paddingTB),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.camera_alt_rounded,
+                                color: AppColor.textHighEm,
+                                size: ValuesConstants.iconSize,
+                              ),
+                              const SizedBox(
+                                width: ValuesConstants.paddingSmall,
+                              ),
+                              Text(
+                                "Camera",
+                                style: AppTypography.textStyle10Bold,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 25,
+                            child: Switch(
+                              thumbIcon: thumbIcon,
+                              value: light,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  light = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.all(ValuesConstants.paddingSmall),
+                      child: Divider(
+                        color: AppColor.componentBorder,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.mic_none_rounded,
+                              color: AppColor.textHighEm,
+                              size: ValuesConstants.iconSize,
+                            ),
+                            const SizedBox(
+                              width: ValuesConstants.paddingSmall,
+                            ),
+                            Text(
+                              "Microphone",
+                              style: AppTypography.textStyle10Bold,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 25,
+                          child: Switch(
+                            thumbIcon: thumbIcon,
+                            value: light1,
+                            onChanged: (bool value) {
+                              setState(() {
+                                light1 = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                ButtonData(
-                  icon: Icons.mic_rounded,
-                  text: 'Microphone',
-                  trailingSwitch: CustomSwitch(
-                    initialValue: true,
-                    onChanged: (value) {
-                      // Handle toggle
-                    },
-                  ),
-                  onTap: () {
-                    // Handle tap
-                  },
-                ),
-              ],
+              ),
             ),
             const SizedBox(
               height: ValuesConstants.spaceVertical,
@@ -212,23 +439,67 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(
               height: ValuesConstants.paddingSmall,
             ),
-            CustomButtonWidget(
-              buttons: [
-                ButtonData(
-                  icon: Icons.help_rounded,
-                  text: 'Help',
-                  onTap: () {
-                    // Handle tap
-                  },
+            Container(
+              width: ValuesConstants.screenWidth(context),
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(ValuesConstants.radiusLarge),
+                color: AppColor.surfaceFG,
+              ),
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    ValuesConstants.paddingLR,
+                    ValuesConstants.paddingTB,
+                    ValuesConstants.paddingLR,
+                    ValuesConstants.paddingTB),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.help_outline_rounded,
+                            color: AppColor.textHighEm,
+                            size: ValuesConstants.iconSize,
+                          ),
+                          const SizedBox(
+                            width: ValuesConstants.paddingSmall,
+                          ),
+                          Text(
+                            "Help",
+                            style: AppTypography.textStyle10Bold,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.all(ValuesConstants.paddingSmall),
+                      child: Divider(
+                        color: AppColor.componentBorder,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.info_outline_rounded,
+                          color: AppColor.textHighEm,
+                          size: ValuesConstants.iconSize,
+                        ),
+                        const SizedBox(
+                          width: ValuesConstants.paddingSmall,
+                        ),
+                        Text(
+                          "About",
+                          style: AppTypography.textStyle10Bold,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                ButtonData(
-                  icon: Icons.info_rounded,
-                  text: 'About',
-                  onTap: () {
-                    // Handle tap
-                  },
-                ),
-              ],
+              ),
             ),
             const SizedBox(
               height: ValuesConstants.paddingLR,
@@ -237,15 +508,16 @@ class _ProfilePageState extends State<ProfilePage> {
               width: ValuesConstants.screenWidth(context),
               height: ValuesConstants.containerSmallMedium,
               child: TextButton(
-                onPressed: (() {
+                onPressed: () {
                   Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ));
-                }),
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColor.surfaceFG),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Authenticate(),
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStatePropertyAll(AppColor.surfaceFG),
                 ),
                 child: Text(
                   'Logout',
