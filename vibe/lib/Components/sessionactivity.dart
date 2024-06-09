@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vibe/Components/usertab.dart';
 import 'package:vibe/Screens/session.dart';
 import 'package:vibe/Constants/colors.dart';
@@ -18,12 +19,7 @@ class SessionActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SessionView(),
-          ),
-        );
+        context.push('/sessionactivity', extra: sessionName);
       },
       child: Column(
         children: [

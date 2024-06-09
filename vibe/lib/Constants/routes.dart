@@ -7,6 +7,7 @@ import 'package:vibe/Pages/profilepage.dart';
 import 'package:vibe/Screens/authenticate/login.dart';
 import 'package:vibe/Screens/authenticate/register.dart';
 import 'package:vibe/Screens/createsession.dart';
+import 'package:vibe/Screens/userchat.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
@@ -20,28 +21,41 @@ final GoRouter router = GoRouter(
       builder: (context, state) => RegisterPage(),
     ),
     GoRoute(
-      path: '/navigator',
-      builder: (context, state) => NavigatorPage(),
+      path: '/create_session',
+      builder: (context, state) => SessionCreate(),
+    ),
+    GoRoute(
+        path: '/userchat',
+        builder: (context, state) {
+          final String title = state.extra as String;
+          return UserChat(title: title);
+        }),
+    GoRoute(
+        path: '/sessionactivity',
+        builder: (context, state) {
+          final String title = state.extra as String;
+          return UserChat(title: title);
+        }),
+    ShellRoute(
+      builder: (context, state, child) {
+        return NavigatorPage(child: child);
+      },
       routes: [
         GoRoute(
-          path: 'home',
+          path: '/navigator/home',
           builder: (context, state) => HomePage(),
         ),
         GoRoute(
-          path: 'friends',
+          path: '/navigator/friends',
           builder: (context, state) => FriendsPage(),
         ),
         GoRoute(
-          path: 'notifications',
+          path: '/navigator/notifications',
           builder: (context, state) => NotificationPage(),
         ),
         GoRoute(
-          path: 'profile',
+          path: '/navigator/profile',
           builder: (context, state) => ProfilePage(),
-        ),
-        GoRoute(
-          path: 'create_session',
-          builder: (context, state) => SessionCreate(),
         ),
       ],
     ),

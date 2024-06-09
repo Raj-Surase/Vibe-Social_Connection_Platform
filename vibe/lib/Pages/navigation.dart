@@ -5,14 +5,11 @@ import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
-import 'package:vibe/Pages/friendspage.dart';
-import 'package:vibe/Pages/home.dart';
-import 'package:vibe/Pages/notifications.dart';
-import 'package:vibe/Pages/profilepage.dart';
 import 'package:vibe/Provider/userprovider.dart';
 
 class NavigatorPage extends StatefulWidget {
-  const NavigatorPage({super.key});
+  final Widget child;
+  const NavigatorPage({super.key, required this.child});
 
   @override
   State<NavigatorPage> createState() => _NavigatorPageState();
@@ -28,16 +25,16 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
     switch (selectedIndex) {
       case 0:
-        context.go('/navigator/home');
+        context.pushReplacement('/navigator/home');
         break;
       case 1:
-        context.go('/navigator/friends');
+        context.pushReplacement('/navigator/friends');
         break;
       case 2:
-        context.go('/navigator/notifications');
+        context.pushReplacement('/navigator/notifications');
         break;
       case 3:
-        context.go('/navigator/profile');
+        context.pushReplacement('/navigator/profile');
         break;
     }
   }
@@ -53,34 +50,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           style: AppTypography.textStyle24Bold,
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Navigator(
-              onGenerateRoute: (settings) {
-                Widget page;
-                switch (settings.name) {
-                  case '/navigator/home':
-                    page = HomePage();
-                    break;
-                  case '/navigator/friends':
-                    page = FriendsPage();
-                    break;
-                  case '/navigator/notifications':
-                    page = NotificationPage();
-                    break;
-                  case '/navigator/profile':
-                    page = ProfilePage();
-                    break;
-                  default:
-                    page = HomePage();
-                }
-                return MaterialPageRoute(builder: (_) => page);
-              },
-            ),
-          ),
-        ],
-      ),
+      body: widget.child,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Visibility(
         visible: selectedIndex == 0,
@@ -95,7 +65,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           ),
           child: FloatingActionButton(
             onPressed: () {
-              context.go('/navigator/create_session');
+              context.push('/create_session');
             },
             backgroundColor: Colors.transparent,
             elevation: 0,

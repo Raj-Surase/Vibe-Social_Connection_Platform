@@ -272,12 +272,12 @@ class _UserProfileInitState extends State<UserProfileInit> {
                           );
                         });
                   } else {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NavigatorPage(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const NavigatorPage(),
+                    //   ),
+                    // );
                   }
                 },
                 style: ButtonStyle(
