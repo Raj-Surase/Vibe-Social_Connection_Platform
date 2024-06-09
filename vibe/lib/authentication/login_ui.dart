@@ -86,18 +86,18 @@ SafeArea LoginUI(BuildContext context, AuthStateController formEvents,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   textInputAction: TextInputAction.done,
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                  // validator: (value) => formStates.password.valueObject!.fold(
-                  //   (failure) => failure.maybeMap(
-                  //     orElse: () => null,
-                  //     // shortPassword: (value) => "Very short password",
-                  //     // noUpperCase: (value) =>
-                  //     //     "Must contain an uppercase character",
-                  //     // noNumber: (value) => "Must contain a number",
-                  //     // noSpecialSymbol: (value) =>
-                  //     //     "Must contain a special character",
-                  //   ),
-                  //   (r) => null,
-                  // ),
+                  validator: (value) => formStates.password.valueObject!.fold(
+                    (failure) => failure.maybeMap(
+                      orElse: () => null,
+                      // shortPassword: (value) => "Very short password",
+                      // noUpperCase: (value) =>
+                      //     "Must contain an uppercase character",
+                      // noNumber: (value) => "Must contain a number",
+                      // noSpecialSymbol: (value) =>
+                      //     "Must contain a special character",
+                    ),
+                    (r) => null,
+                  ),
                   onChanged: (value) => formEvents.mapEventsToStates(
                     AuthEvents.passwordChanged(password: value.toString()),
                   ),
@@ -163,10 +163,7 @@ SafeArea LoginUI(BuildContext context, AuthStateController formEvents,
                 //           builder: (BuildContext context) {
                 //             return DialogBox(
                 //               color: AppColor.componentError,
-                //               text: Text(
-                //                 "Invalid Login",
-                //                 style: AppTypography.textStyle14Error,
-                //               ),
+                //               text: Text("Invalid Login", style: AppTypography.textStyle14Error,),
                 //             );
                 //           });
                 //     }),
