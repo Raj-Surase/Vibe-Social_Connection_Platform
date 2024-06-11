@@ -105,16 +105,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 isSecure: true),
             TextButton(
               onPressed: (() {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ));
+                context.replace('/login');
               }),
               child: Text(
                 "Already have an account? Sign in.",
-                style:
-                    AppTypography.textStyle10Link(color: AppColor.textHighEm),
+                style: AppTypography.textStyle10Link(
+                    color: AppColor.primaryButton),
               ),
             ),
             const SizedBox(
@@ -129,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (username.isNotEmpty) {
                     Provider.of<UserProvider>(context, listen: false)
                         .login(username);
-                    context.go(
+                    context.replace(
                         '/navigator/home'); // Navigate to the home page within the navigator
                   }
                 },

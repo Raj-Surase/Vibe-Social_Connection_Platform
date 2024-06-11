@@ -25,16 +25,16 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
     switch (selectedIndex) {
       case 0:
-        context.pushReplacement('/navigator/home');
+        context.replace('/navigator/home');
         break;
       case 1:
-        context.pushReplacement('/navigator/friends');
+        context.replace('/navigator/friends');
         break;
       case 2:
-        context.pushReplacement('/navigator/notifications');
+        context.replace('/navigator/notifications');
         break;
       case 3:
-        context.pushReplacement('/navigator/profile');
+        context.replace('/navigator/profile');
         break;
     }
   }

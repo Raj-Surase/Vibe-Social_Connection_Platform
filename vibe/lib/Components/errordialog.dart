@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
@@ -44,7 +45,7 @@ class ErrorDialogBox extends StatelessWidget {
             ),
             const SizedBox(height: ValuesConstants.paddingLR),
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.pop(),
               style: TextButton.styleFrom(
                 // padding: EdgeInsets.only(
                 //     left: ValuesConstants.paddingTB,

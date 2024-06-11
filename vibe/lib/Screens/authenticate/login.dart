@@ -79,11 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 isSecure: true),
             TextButton(
               onPressed: (() {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterPage(),
-                    ));
+                context.replace('/register');
               }),
               child: Text(
                 "Don't have an account? Sign up.",
@@ -103,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (username.isNotEmpty) {
                     Provider.of<UserProvider>(context, listen: false)
                         .login(username);
-                    context.go(
+                    context.replace(
                         '/navigator/home'); // Navigate to the home page within the navigator
                   }
                 },

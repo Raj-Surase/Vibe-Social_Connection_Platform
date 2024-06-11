@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
@@ -24,7 +25,7 @@ class _UserChatState extends State<UserChat> {
         leadingWidth: ValuesConstants.containerMediumLarge,
         leading: IconButton(
           onPressed: (() {
-            Navigator.pop(context);
+            context.pop();
           }),
           icon: Row(
             children: [
