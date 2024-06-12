@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vibe/Components/auth_tf.dart';
+import 'package:vibe/Screens/authenticate/authservice.dart';
 import 'package:vibe/Screens/authenticate/register.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
@@ -18,6 +20,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController usernamecontroller;
   late TextEditingController passwordcontroller;
+  final AuthService _auth = AuthService();
 
   @override
   void initState() {
@@ -94,7 +97,17 @@ class _LoginPageState extends State<LoginPage> {
               width: ValuesConstants.screenWidth(context),
               height: ValuesConstants.containerSmallMedium,
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  User? user = await _auth.signInWithEmailAndPassword(
+                    context,
+                    usernamecontroller.text,
+                    passwordcontroller.text,
+                  );
+                  if (user != null) {
+                    // Navigate to the home page
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }
+
                   final username = usernamecontroller.text;
                   if (username.isNotEmpty) {
                     Provider.of<UserProvider>(context, listen: false)
