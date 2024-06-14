@@ -1,0 +1,28 @@
+[debug] [2024-06-10T04:37:28.260Z] ----------------------------------------------------------------------
+[debug] [2024-06-10T04:37:28.265Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\rajsu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2024-06-10T04:37:28.266Z] CLI Version:   13.10.2
+[debug] [2024-06-10T04:37:28.267Z] Platform:      win32
+[debug] [2024-06-10T04:37:28.267Z] Node Version:  v20.14.0
+[debug] [2024-06-10T04:37:28.267Z] Time:          Mon Jun 10 2024 10:07:28 GMT+0530 (India Standard Time)
+[debug] [2024-06-10T04:37:28.268Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-06-10T04:37:28.282Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-06-10T04:37:28.283Z] > authorizing via signed-in user (rajsurase3@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  R:\Programming\Projects\Music Streaming App\vibe\android
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
