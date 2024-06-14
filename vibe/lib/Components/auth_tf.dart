@@ -62,10 +62,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
         labelText: widget.hintText,
         fillColor: AppColor.surfaceFG,
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelStyle:
-            AppTypography.textStyle14Inactive(color: AppColor.textHighEm),
+        labelStyle: AppTypography.textStyle14Normal(color: AppColor.textLowEm),
         errorStyle:
-            AppTypography.textStyle12Error(color: AppColor.componentError),
+            AppTypography.textStyle12Bold(color: AppColor.componentError),
         border: const OutlineInputBorder(
           borderRadius:
               BorderRadius.all(Radius.circular(ValuesConstants.radiusSmall)),

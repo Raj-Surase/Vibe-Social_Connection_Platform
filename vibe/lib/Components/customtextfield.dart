@@ -30,7 +30,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: AppColor.componentActive,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: AppTypography.textStyle14Inactive(color: AppColor.textLowEm),
+        hintStyle: AppTypography.textStyle14Normal(color: AppColor.textLowEm),
         disabledBorder: InputBorder.none,
         enabledBorder: InputBorder.none,
         // fillColor: AppColor.surfaceFG,

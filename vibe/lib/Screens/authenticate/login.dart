@@ -100,20 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordController,
                   isSecure: true),
               const SizedBox(
-                height: ValuesConstants.paddingTB,
-              ),
-              GestureDetector(
-                onTap: (() {
-                  context.replace('/register');
-                }),
-                child: Text(
-                  "Don't have an account? Sign up.",
-                  style: AppTypography.textStyle10Link(
-                      color: AppColor.primaryButton),
-                ),
-              ),
-              const SizedBox(
-                height: ValuesConstants.paddingTB,
+                height: ValuesConstants.paddingLR,
               ),
               SizedBox(
                 width: ValuesConstants.screenWidth(context),
@@ -128,6 +115,36 @@ class _LoginPageState extends State<LoginPage> {
                     'Login',
                     style: AppTypography.textStyle14Bold(
                         color: AppColor.textHighEm),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: ValuesConstants.paddingLR,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  context.push('/resetpass');
+                }),
+                child: SizedBox(
+                  child: Text(
+                    "Forgot password? click here.",
+                    style: AppTypography.textStyle12Bold(
+                        color: AppColor.primaryButton),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: ValuesConstants.paddingTB,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  context.replace('/register');
+                }),
+                child: SizedBox(
+                  child: Text(
+                    "Don't have an account? Sign up.",
+                    style: AppTypography.textStyle12Bold(
+                        color: AppColor.primaryButton),
                   ),
                 ),
               ),

@@ -27,43 +27,43 @@ class AppTypography {
     );
   }
 
-  static TextStyle textStyle14Error({Color? color}) {
+  static TextStyle textStyle12Bold({Color? color}) {
     return GoogleFonts.montserrat(
       color: color ?? AppColor.componentError,
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
+      fontSize: 12,
+      fontWeight: FontWeight.w700,
     );
   }
 
-  static TextStyle textStyle14Inactive({Color? color}) {
-    return GoogleFonts.montserrat(
-      color: color ?? const Color.fromARGB(255, 112, 112, 112),
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-    );
-  }
-
-  static TextStyle textStyle12Error({Color? color}) {
+  static TextStyle textStyle12Normal({Color? color}) {
     return GoogleFonts.montserrat(
       color: color ?? AppColor.componentError,
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: FontWeight.w500,
-    );
-  }
-
-  static TextStyle textStyle10Link({Color? color}) {
-    return GoogleFonts.montserrat(
-      fontSize: 10,
-      fontWeight: FontWeight.w600,
-      color: color ?? AppColor.primaryButton,
     );
   }
 
   static TextStyle textStyle10Bold({Color? color}) {
     return GoogleFonts.montserrat(
       fontSize: 10,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w700,
       color: color ?? AppColor.textHighEm,
+    );
+  }
+
+  static TextStyle textStyle10Normal({Color? color}) {
+    return GoogleFonts.montserrat(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      color: color ?? AppColor.primaryButton,
+    );
+  }
+
+  static TextStyle textStyle8Bold({Color? color}) {
+    return GoogleFonts.montserrat(
+      fontSize: 8,
+      fontWeight: FontWeight.w700,
+      color: color ?? AppColor.textLowEm,
     );
   }
 

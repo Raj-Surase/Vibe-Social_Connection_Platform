@@ -6,7 +6,7 @@ SnackBar createSnackBar(String message) {
   return SnackBar(
     content: Text(
       message,
-      style: AppTypography.textStyle12Error(color: AppColor.textHighEm),
+      style: AppTypography.textStyle12Bold(color: AppColor.textHighEm),
     ),
     backgroundColor: AppColor.componentError,
     behavior: SnackBarBehavior.floating,

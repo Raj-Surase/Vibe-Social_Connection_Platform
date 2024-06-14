@@ -15,9 +15,9 @@ class AppColor {
       ? const Color.fromARGB(255, 255, 62, 62)
       : const Color.fromARGB(255, 255, 62, 62);
   static Color textHighEm =
-      isLight ? const Color(0xff111a0c) : const Color(0xffEEE5F3);
+      isLight ? const Color(0xff111a0c) : Color.fromARGB(255, 243, 241, 244);
   static Color textLowEm =
-      isLight ? const Color(0xff191919) : const Color(0xffE6E6E6);
+      isLight ? const Color(0xff191919) : Color.fromARGB(255, 218, 214, 214);
   static Color primaryButton = isLight
       ? const Color.fromARGB(255, 73, 158, 255)
       : const Color.fromARGB(255, 73, 158, 255);

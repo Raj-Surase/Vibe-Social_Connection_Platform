@@ -129,20 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: confirmpasswordController,
                   isSecure: true),
               const SizedBox(
-                height: ValuesConstants.paddingTB,
-              ),
-              GestureDetector(
-                onTap: (() {
-                  context.replace('/login');
-                }),
-                child: Text(
-                  "Already have an account? Sign in.",
-                  style: AppTypography.textStyle10Link(
-                      color: AppColor.primaryButton),
-                ),
-              ),
-              const SizedBox(
-                height: ValuesConstants.paddingTB,
+                height: ValuesConstants.paddingLR,
               ),
               SizedBox(
                 width: ValuesConstants.screenWidth(context),
@@ -157,6 +144,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     'Register',
                     style: AppTypography.textStyle14Bold(
                         color: AppColor.textHighEm),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: ValuesConstants.paddingLR,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  context.replace('/login');
+                }),
+                child: SizedBox(
+                  child: Text(
+                    "Already have an account? Sign in.",
+                    style: AppTypography.textStyle12Bold(
+                        color: AppColor.primaryButton),
                   ),
                 ),
               ),
