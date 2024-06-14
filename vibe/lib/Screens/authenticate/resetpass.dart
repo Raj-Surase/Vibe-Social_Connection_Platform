@@ -7,10 +7,16 @@ import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 
-class ResetPassword extends StatelessWidget {
+class ResetPassword extends StatefulWidget {
   ResetPassword({super.key});
 
-  final TextEditingController emailId = TextEditingController();
+  @override
+  State<ResetPassword> createState() => _ResetPasswordState();
+}
+
+class _ResetPasswordState extends State<ResetPassword> {
+  TextEditingController emailId = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
 
   Future<void> forgotPass(BuildContext context) async {
@@ -30,6 +36,18 @@ class ResetPassword extends StatelessWidget {
         createSnackBar("Error: $e"),
       );
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    emailId = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailId.dispose();
+    super.dispose();
   }
 
   @override

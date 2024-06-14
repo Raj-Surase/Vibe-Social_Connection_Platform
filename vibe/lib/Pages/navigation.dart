@@ -41,69 +41,78 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserProvider>(context);
+    return Consumer<UserProvider>(builder: (context, userProvider, _) {
+      if (!userProvider.isLoggedIn) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          GoRouter.of(context).replace('/auth'); // Navigate to auth page
+        });
+        return Container(
+          color: AppColor.surfaceBG,
+        ); // Return an empty container while redirecting
+      }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Vibes',
-          style: AppTypography.textStyle24Bold(color: AppColor.textHighEm),
-        ),
-      ),
-      body: widget.child,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Visibility(
-        visible: selectedIndex == 0,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(ValuesConstants.radiusCircle),
-            color: AppColor.surfaceFG,
-            border: Border.all(
-              color: AppColor.surfaceBG,
-              width: 5,
-            ),
-          ),
-          child: FloatingActionButton(
-            onPressed: () {
-              context.push('/create_session');
-            },
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            child: Icon(
-              Icons.add_rounded,
-              color: AppColor.componentActive,
-              size: ValuesConstants.iconSize,
-            ),
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Vibes',
+            style: AppTypography.textStyle24Bold(color: AppColor.textHighEm),
           ),
         ),
-      ),
-      bottomNavigationBar: SlidingClippedNavBar(
-        backgroundColor: AppColor.surfaceFG,
-        onButtonPressed: onButtonPressed,
-        iconSize: ValuesConstants.iconSize,
-        activeColor: AppColor.componentActive,
-        inactiveColor: AppColor.componentInactive,
-        selectedIndex: selectedIndex,
-        fontSize: 14,
-        barItems: <BarItem>[
-          BarItem(
-            icon: Icons.home_rounded,
-            title: 'Home',
+        body: widget.child,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Visibility(
+          visible: selectedIndex == 0,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ValuesConstants.radiusCircle),
+              color: AppColor.surfaceFG,
+              border: Border.all(
+                color: AppColor.surfaceBG,
+                width: 5,
+              ),
+            ),
+            child: FloatingActionButton(
+              onPressed: () {
+                context.push('/create_session');
+              },
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              child: Icon(
+                Icons.add_rounded,
+                color: AppColor.componentActive,
+                size: ValuesConstants.iconSize,
+              ),
+            ),
           ),
-          BarItem(
-            icon: Icons.people_rounded,
-            title: 'Friends',
-          ),
-          BarItem(
-            icon: Icons.notifications_rounded,
-            title: 'Notifications',
-          ),
-          BarItem(
-            icon: Icons.person_rounded,
-            title: 'Profile',
-          ),
-        ],
-      ),
-    );
+        ),
+        bottomNavigationBar: SlidingClippedNavBar(
+          backgroundColor: AppColor.surfaceFG,
+          onButtonPressed: onButtonPressed,
+          iconSize: ValuesConstants.iconSize,
+          activeColor: AppColor.componentActive,
+          inactiveColor: AppColor.componentInactive,
+          selectedIndex: selectedIndex,
+          fontSize: 14,
+          barItems: <BarItem>[
+            BarItem(
+              icon: Icons.home_rounded,
+              title: 'Home',
+            ),
+            BarItem(
+              icon: Icons.people_rounded,
+              title: 'Friends',
+            ),
+            BarItem(
+              icon: Icons.notifications_rounded,
+              title: 'Notifications',
+            ),
+            BarItem(
+              icon: Icons.person_rounded,
+              title: 'Profile',
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

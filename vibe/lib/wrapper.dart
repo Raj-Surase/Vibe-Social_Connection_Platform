@@ -1,8 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/routes.dart';
+import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 
 class Wrapper extends StatelessWidget {
@@ -13,41 +14,27 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active) {
-          if (snapshot.hasData) {
-            // User is authenticated, navigate to HomePage
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (location != '/navigator/home') {
-                context.go('/navigator/home');
-              }
-            });
-          } else {
-            // User is not authenticated, navigate to Authenticate
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (location != '/auth') {
-                context.go('/auth');
-              }
-            });
-          }
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              "Error occurred",
-              style:
-                  AppTypography.textStyle24Bold(color: AppColor.componentError),
-            ),
-          );
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
+    if (user != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (location != '/navigator/home') {
+          context.go('/navigator/home');
         }
-        // Show a loading spinner while checking the authentication state
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
+      });
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (location != '/auth') {
+          context.go('/auth');
+        }
+      });
+    }
+
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

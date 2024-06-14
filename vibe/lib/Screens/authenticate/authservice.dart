@@ -14,7 +14,8 @@ class AuthService {
           email: email, password: password);
       User? user = result.user;
       if (user != null) {
-        Provider.of<UserProvider>(context, listen: false).login(user.email!);
+        Provider.of<UserProvider>(context, listen: false)
+            .signIn(email, password);
       }
       return user;
     } catch (e) {
@@ -31,7 +32,8 @@ class AuthService {
           email: email, password: password);
       User? user = result.user;
       if (user != null) {
-        Provider.of<UserProvider>(context, listen: false).login(user.email!);
+        Provider.of<UserProvider>(context, listen: false)
+            .signIn(email, password);
       }
       return user;
     } catch (e) {
@@ -41,10 +43,11 @@ class AuthService {
   }
 
   // Sign out
-  Future<void> signOut(BuildContext context) async {
+  Future<void> signOut(
+      BuildContext context, String email, String password) async {
     try {
       await _auth.signOut();
-      Provider.of<UserProvider>(context, listen: false).logout();
+      Provider.of<UserProvider>(context, listen: false).signOut();
     } catch (e) {
       print(e.toString());
     }

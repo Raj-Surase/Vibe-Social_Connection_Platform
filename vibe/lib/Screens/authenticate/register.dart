@@ -1,11 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vibe/Components/auth_tf.dart';
-import 'package:vibe/Components/customsnackbar.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
+import 'package:vibe/Provider/userprovider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -42,21 +43,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (passwordController.text.trim() !=
         confirmpasswordController.text.trim()) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(createSnackBar("Password do not match."));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Passwords do not match')),
+      );
       return;
     }
+
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: usernameController.text.trim(),
-        password: passwordController.text.trim(),
+      await Provider.of<UserProvider>(context, listen: false).signUp(
+        usernameController.text.trim(),
+        passwordController.text.trim(),
       );
-      // If the registration is successful, navigate to the Home screen
       context.go('/navigator/home');
     } catch (e) {
-      // Handle error (e.g., show a snackbar or dialog)
       ScaffoldMessenger.of(context).showSnackBar(
-        createSnackBar("Error: $e"),
+        SnackBar(content: Text('Error: $e')),
       );
     }
   }
@@ -87,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: ValuesConstants.containerSmallMedium,
               ),
               Text(
-                "Email id",
+                "Email",
                 style:
                     AppTypography.textStyle14Bold(color: AppColor.textHighEm),
               ),
@@ -95,9 +96,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: ValuesConstants.paddingSmall,
               ),
               AuthTextField(
-                  hintText: "Email Address",
-                  controller: usernameController,
-                  isSecure: false),
+                hintText: "Email Address",
+                controller: usernameController,
+                isSecure: false,
+              ),
               const SizedBox(
                 height: ValuesConstants.paddingTB,
               ),
@@ -110,9 +112,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: ValuesConstants.paddingSmall,
               ),
               AuthTextField(
-                  hintText: "Password",
-                  controller: passwordController,
-                  isSecure: true),
+                hintText: "Password",
+                controller: passwordController,
+                isSecure: true,
+              ),
               const SizedBox(
                 height: ValuesConstants.paddingTB,
               ),
@@ -125,11 +128,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: ValuesConstants.paddingSmall,
               ),
               AuthTextField(
-                  hintText: "Confirm Password",
-                  controller: confirmpasswordController,
-                  isSecure: true),
+                hintText: "Confirm Password",
+                controller: confirmpasswordController,
+                isSecure: true,
+              ),
               const SizedBox(
-                height: ValuesConstants.paddingLR,
+                height: ValuesConstants.paddingTB,
               ),
               SizedBox(
                 width: ValuesConstants.screenWidth(context),
@@ -138,27 +142,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () => signUp(context),
                   style: ButtonStyle(
                     backgroundColor:
-                        WidgetStatePropertyAll(AppColor.primaryButton),
+                        MaterialStateProperty.all(AppColor.primaryButton),
                   ),
                   child: Text(
                     'Register',
                     style: AppTypography.textStyle14Bold(
-                        color: AppColor.textHighEm),
+                      color: AppColor.textHighEm,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(
-                height: ValuesConstants.paddingLR,
+                height: ValuesConstants.paddingTB,
               ),
               GestureDetector(
-                onTap: (() {
-                  context.replace('/login');
-                }),
-                child: SizedBox(
-                  child: Text(
-                    "Already have an account? Sign in.",
-                    style: AppTypography.textStyle12Bold(
-                        color: AppColor.primaryButton),
+                onTap: () {
+                  context.go('/login');
+                },
+                child: Text(
+                  "Already have an account? Login.",
+                  style: AppTypography.textStyle12Bold(
+                    color: AppColor.primaryButton,
                   ),
                 ),
               ),
