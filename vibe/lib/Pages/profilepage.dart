@@ -525,6 +525,7 @@ class _ProfilePageState extends State<ProfilePage> {
               height: ValuesConstants.containerSmallMedium,
               child: TextButton(
                 onPressed: () {
+                  FirebaseAuth.instance.signOut();
                   userProvider.logout();
                   context.go('/');
                 },

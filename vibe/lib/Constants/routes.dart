@@ -9,12 +9,17 @@ import 'package:vibe/Screens/authenticate/login.dart';
 import 'package:vibe/Screens/authenticate/register.dart';
 import 'package:vibe/Screens/createsession.dart';
 import 'package:vibe/Screens/userchat.dart';
+import 'package:vibe/wrapper.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
+      builder: (context, state) => Wrapper(),
+    ),
+    GoRoute(
+      path: '/auth',
       builder: (context, state) => const Authenticate(),
     ),
     GoRoute(

@@ -9,8 +9,8 @@ class AuthTextField extends StatefulWidget {
     required this.isSecure,
     required this.controller,
     this.isEnabled,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final String hintText;
   final bool? isEnabled;
@@ -22,6 +22,30 @@ class AuthTextField extends StatefulWidget {
 }
 
 class _AuthTextFieldState extends State<AuthTextField> {
+  String? _validateEmail(String? value) {
+    if (!widget.isSecure) {
+      if (value == null || value.isEmpty) {
+        return 'Email is required';
+      }
+      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+        return 'Invalid email address';
+      }
+    }
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (widget.isSecure) {
+      if (value == null || value.isEmpty) {
+        return 'Password is required';
+      }
+      if (value.length < 8) {
+        return 'Password must be at least 8 characters long';
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -32,6 +56,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
       cursorColor: AppColor.componentActive,
       style: AppTypography.textStyle14Normal(color: AppColor.textLowEm),
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: widget.isSecure ? _validatePassword : _validateEmail,
       decoration: InputDecoration(
         labelText: widget.hintText,
         fillColor: AppColor.surfaceFG,
