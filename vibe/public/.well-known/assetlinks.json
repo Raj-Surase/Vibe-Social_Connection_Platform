@@ -1,9 +1,0 @@
-[{
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.example.vibe",
-      "sha256_cert_fingerprints":
-      ["18:11:3C:7D:0A:8D:53:AF:F1:A2:4C:C5:01:95:AE:76:CC:A8:CF:25:46:0C:E9:BA:24:82:38:58:13:32:F4:67"]
-    }
-  }]
