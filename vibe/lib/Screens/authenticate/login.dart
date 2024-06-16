@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         emailController.text.trim(),
         passwordController.text.trim(),
       );
-      context.go('/navigator/home');
+      context.replace('/profileinit');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  context.go('/register');
+                  context.replace('/register');
                 },
                 child: Text(
                   "Don't have an account? Sign up.",

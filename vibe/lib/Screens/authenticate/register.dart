@@ -54,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
         usernameController.text.trim(),
         passwordController.text.trim(),
       );
-      context.go('/navigator/home');
+      context.replace('/profileinit');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  context.go('/login');
+                  context.replace('/login');
                 },
                 child: Text(
                   "Already have an account? Login.",
