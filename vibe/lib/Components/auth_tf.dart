@@ -6,7 +6,8 @@ import 'package:vibe/Constants/values.dart';
 class AuthTextField extends StatefulWidget {
   const AuthTextField({
     required this.hintText,
-    required this.isSecure,
+    this.isSecure = false,
+    this.isUsername,
     required this.controller,
     this.isEnabled,
     Key? key,
@@ -14,6 +15,7 @@ class AuthTextField extends StatefulWidget {
 
   final String hintText;
   final bool? isEnabled;
+  final bool? isUsername;
   final TextEditingController controller;
   final bool isSecure;
 
@@ -23,7 +25,7 @@ class AuthTextField extends StatefulWidget {
 
 class _AuthTextFieldState extends State<AuthTextField> {
   String? _validateEmail(String? value) {
-    if (!widget.isSecure) {
+    if (!widget.isSecure && widget.isUsername != true) {
       if (value == null || value.isEmpty) {
         return 'Email is required';
       }
@@ -46,6 +48,18 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return null;
   }
 
+  String? _validateUsername(String? value) {
+    if (widget.isUsername == true) {
+      if (value == null || value.isEmpty) {
+        return 'Username is required';
+      }
+      if (!RegExp(r'^[a-zA-Z0-9\s]+$').hasMatch(value)) {
+        return 'Username can only contain alphabets, numbers, and whitespace';
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -57,7 +71,11 @@ class _AuthTextFieldState extends State<AuthTextField> {
       style: AppTypography.textStyle14Normal(color: AppColor.textLowEm),
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: widget.isSecure ? _validatePassword : _validateEmail,
+      validator: widget.isSecure
+          ? _validatePassword
+          : widget.isUsername == true
+              ? _validateUsername
+              : _validateEmail,
       decoration: InputDecoration(
         labelText: widget.hintText,
         fillColor: AppColor.surfaceFG,

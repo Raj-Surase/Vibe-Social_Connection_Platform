@@ -29,19 +29,19 @@
 //   String imageUrl = '';
 
 //   // Function to upload image to Firebase Storage
-// //   Future<String> uploadImageToFirebase(File imageFile) async {
-// //     String fileName = widget.user;
+  // Future<String> uploadImageToFirebase(File imageFile) async {
+  //   String fileName = widget.user;
 
-// //     Reference storageRef =
-// //         FirebaseStorage.instance.ref().child('profile/$fileName');
+  //   Reference storageRef =
+  //       FirebaseStorage.instance.ref().child('profile/$fileName');
 
-// //     UploadTask uploadTask = storageRef.putFile(imageFile);
+  //   UploadTask uploadTask = storageRef.putFile(imageFile);
 
-// //     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+  //   TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
 
-// //     String imageUrl = await taskSnapshot.ref.getDownloadURL();
-// //     return imageUrl;
-// //   }
+  //   String imageUrl = await taskSnapshot.ref.getDownloadURL();
+  //   return imageUrl;
+  // }
 
 // //   // Function to get image from gallery or camera and upload it to Firebase
 // //   Future<void> getImageFromFirebase(ImageSource img) async {
