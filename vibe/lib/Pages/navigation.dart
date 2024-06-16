@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Provider/userprovider.dart';
@@ -17,6 +18,25 @@ class NavigatorPage extends StatefulWidget {
 
 class _NavigatorPageState extends State<NavigatorPage> {
   int selectedIndex = 0;
+  final String location =
+      router.routerDelegate.currentConfiguration.uri.toString();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Get the current route from GoRouter and update selectedIndex
+    String currentRoute = location;
+    if (currentRoute == '/navigator/home') {
+      selectedIndex = 0;
+    } else if (currentRoute == '/navigator/friends') {
+      selectedIndex = 1;
+    } else if (currentRoute == '/navigator/notifications') {
+      selectedIndex = 2;
+    } else if (currentRoute == '/navigator/profile') {
+      selectedIndex = 3;
+    }
+  }
 
   void onButtonPressed(int index) {
     setState(() {

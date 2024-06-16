@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'Provider/userprovider.dart';
+import 'package:vibe/Provider/applinks_deeplinks.dart';
+import 'package:vibe/Provider/platform_channel.dart';
+import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/Constants/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +27,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    // Initialize deep links handling
+    AppLinksDeepLink.instance.initDeepLinks();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => UserProvider(),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
