@@ -6,6 +6,7 @@ import 'package:vibe/Pages/notifications.dart';
 import 'package:vibe/Pages/profilepage.dart';
 import 'package:vibe/Screens/authenticate/authenticate.dart';
 import 'package:vibe/Screens/authenticate/login.dart';
+import 'package:vibe/Screens/authenticate/profileinit.dart';
 import 'package:vibe/Screens/authenticate/register.dart';
 import 'package:vibe/Screens/authenticate/resetpass.dart';
 import 'package:vibe/Screens/createsession.dart';
@@ -34,6 +35,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/resetpass',
       builder: (context, state) => ResetPassword(),
+    ),
+    GoRoute(
+      path: '/profileinit',
+      builder: (context, state) => const ProfileInit(),
     ),
     GoRoute(
       path: '/create_session',
