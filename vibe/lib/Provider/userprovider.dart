@@ -6,7 +6,7 @@ class UserProvider with ChangeNotifier {
 
   User? get user => _user;
 
-  bool get isLoggedIn => _user != null; // Getter to check if user is logged in
+  bool get isLoggedIn => _user != null;
 
   UserProvider() {
     _initializeUser();
@@ -27,7 +27,7 @@ class UserProvider with ChangeNotifier {
         password: password,
       );
     } catch (e) {
-      throw e; // Consider throwing a custom exception here if needed
+      throw e;
     }
   }
 
@@ -38,7 +38,7 @@ class UserProvider with ChangeNotifier {
         password: password,
       );
     } catch (e) {
-      throw e; // Consider throwing a custom exception here with clear error messages
+      throw e;
     }
   }
 
@@ -50,13 +50,12 @@ class UserProvider with ChangeNotifier {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } catch (e) {
-      throw e; // Consider throwing a custom exception here if needed
+      throw e;
     }
   }
 
   @override
   void dispose() {
-    // Unsubscribe from auth state changes when the provider is disposed
     FirebaseAuth.instance.authStateChanges().listen((User? user) {}).cancel();
     super.dispose();
   }

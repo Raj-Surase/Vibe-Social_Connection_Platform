@@ -2,13 +2,14 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:vibe/Components/auth_tf.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
+import 'package:vibe/Provider/userprovider.dart';
 
 class ProfileInit extends StatefulWidget {
   const ProfileInit({super.key});
@@ -19,14 +20,14 @@ class ProfileInit extends StatefulWidget {
 
 class _ProfileInitState extends State<ProfileInit> {
   late TextEditingController usernameController;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  File? _image;
-  final ImagePicker _picker = ImagePicker();
+  late Future<List<String>> _imageUrlsFuture;
+  String? selectedImageUrl;
+  int? selectedIndex;
 
   @override
   void initState() {
     super.initState();
+    _imageUrlsFuture = _fetchImageUrls();
     usernameController = TextEditingController();
   }
 
@@ -36,65 +37,147 @@ class _ProfileInitState extends State<ProfileInit> {
     super.dispose();
   }
 
-  Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      }
-    });
+  Future<List<String>> _fetchImageUrls() async {
+    ListResult result = await FirebaseStorage.instance.ref('/').listAll();
+    List<String> urls =
+        await Future.wait(result.items.map((ref) => ref.getDownloadURL()));
+    return urls;
   }
 
-  Future<void> _uploadProfile() async {
-    if (_image == null || usernameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please complete your profile')),
-      );
-      return;
-    }
-
-    try {
-      // Ensure user is authenticated
-      if (_auth.currentUser == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User not authenticated')),
+  void _pickImage() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(ValuesConstants.paddingLR),
+                decoration: BoxDecoration(
+                  color: AppColor.surfaceFG,
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(ValuesConstants.radiusLarge)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FutureBuilder<List<String>>(
+                      future: _imageUrlsFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text(
+                            'Error: ${snapshot.error}',
+                            style: AppTypography.textStyle14Bold(
+                                color: AppColor.textHighEm),
+                          );
+                        } else {
+                          List<String> imageUrls = snapshot.data!;
+                          return GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: imageUrls.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: ValuesConstants.paddingTB,
+                              crossAxisSpacing: ValuesConstants.paddingTB,
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              String imageUrl = imageUrls[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedIndex = index;
+                                    selectedImageUrl = imageUrl;
+                                  });
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: selectedIndex == index
+                                        ? AppColor.componentInactive
+                                            .withOpacity(0.5)
+                                        : AppColor.surfaceBG,
+                                    image: DecorationImage(
+                                        image: NetworkImage(imageUrl)),
+                                  ),
+                                  child: Center(
+                                    child: selectedIndex == index
+                                        ? Icon(
+                                            Icons.check_rounded,
+                                            color: AppColor.componentActive,
+                                            size:
+                                                ValuesConstants.containerSmall,
+                                          )
+                                        : Container(),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(height: ValuesConstants.paddingLR),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all(AppColor.primaryButton),
+                        ),
+                        onPressed: () {
+                          // if (selectedImageUrl != null) {
+                          //   await _firestore
+                          //       .collection('users')
+                          //       .doc(_auth.currentUser?.uid)
+                          //       .update({
+                          //     'profile_picture': _selectedImageUrl,
+                          //   });
+                          //   setState(() {
+                          //     _image = null;
+                          //   });
+                          // }
+                          Navigator.pop(context);
+                          ;
+                        },
+                        child: Text(
+                          'Select',
+                          style: AppTypography.textStyle14Bold(
+                              color: AppColor.textHighEm),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         );
-        return;
+      },
+    );
+  }
+
+  void _continue() {
+    if (usernameController.text.isNotEmpty && selectedImageUrl != null) {
+      // Save the username and image to Firestore (example implementation)
+      User? user = context.read<UserProvider>().user;
+      if (user != null) {
+        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'username': usernameController.text,
+          'imageUrl': selectedImageUrl,
+        });
+        context.go('/navigator/home');
       }
-
-      // Upload image to Firebase Storage
-      String uid = _auth.currentUser!.uid;
-      Reference storageReference =
-          FirebaseStorage.instance.ref().child('profile/$uid.jpg');
-      UploadTask uploadTask = storageReference.putFile(_image!);
-
-      // Optionally add listeners for task state changes
-      uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
-        print('Task state: ${snapshot.state}');
-        print(
-            'Progress: ${(snapshot.bytesTransferred / snapshot.totalBytes) * 100} %');
-      }, onError: (e) {
-        print('Error during upload: $e');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error during upload: $e')),
-        );
-      });
-
-      TaskSnapshot taskSnapshot = await uploadTask;
-      String profilePictureUrl = await taskSnapshot.ref.getDownloadURL();
-
-      // Save user data to Firestore
-      await _firestore.collection('users').doc(uid).set({
-        'username': usernameController.text,
-        'profilePicture': profilePictureUrl,
-      });
-
-      // Notify profile completion
-      context.replace('/navigator/home');
-    } catch (e) {
-      print('Error uploading profile: $e');
+    } else {
+      // Show validation error
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error uploading profile: $e')),
+        SnackBar(content: Text('Please fill in all fields')),
       );
     }
   }
@@ -121,7 +204,7 @@ class _ProfileInitState extends State<ProfileInit> {
             ),
             GestureDetector(
               onTap: _pickImage,
-              child: _image == null
+              child: selectedImageUrl == null
                   ? Container(
                       height: ValuesConstants.containerLarge,
                       width: ValuesConstants.containerLarge,
@@ -143,7 +226,7 @@ class _ProfileInitState extends State<ProfileInit> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: FileImage(_image!),
+                          image: NetworkImage(selectedImageUrl!),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -177,7 +260,7 @@ class _ProfileInitState extends State<ProfileInit> {
               width: ValuesConstants.screenWidth(context),
               height: ValuesConstants.containerSmallMedium,
               child: TextButton(
-                onPressed: _uploadProfile,
+                onPressed: _continue,
                 style: ButtonStyle(
                   backgroundColor:
                       WidgetStateProperty.all(AppColor.primaryButton),
