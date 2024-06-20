@@ -66,6 +66,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
       controller: widget.controller,
       obscureText: widget.isSecure,
       textInputAction: TextInputAction.next,
+      autofocus: true,
       cursorRadius: const Radius.circular(10),
       cursorColor: AppColor.componentActive,
       style: AppTypography.textStyle14Normal(color: AppColor.textLowEm),

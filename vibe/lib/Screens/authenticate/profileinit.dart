@@ -1,14 +1,15 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:vibe/Components/auth_tf.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
+import 'package:vibe/Database/firestore_service.dart';
 import 'package:vibe/Provider/userprovider.dart';
 
 class ProfileInit extends StatefulWidget {
@@ -132,19 +133,7 @@ class _ProfileInitState extends State<ProfileInit> {
                               WidgetStateProperty.all(AppColor.primaryButton),
                         ),
                         onPressed: () {
-                          // if (selectedImageUrl != null) {
-                          //   await _firestore
-                          //       .collection('users')
-                          //       .doc(_auth.currentUser?.uid)
-                          //       .update({
-                          //     'profile_picture': _selectedImageUrl,
-                          //   });
-                          //   setState(() {
-                          //     _image = null;
-                          //   });
-                          // }
                           Navigator.pop(context);
-                          ;
                         },
                         child: Text(
                           'Select',
@@ -163,19 +152,26 @@ class _ProfileInitState extends State<ProfileInit> {
     );
   }
 
-  void _continue() {
+  void _continue() async {
     if (usernameController.text.isNotEmpty && selectedImageUrl != null) {
-      // Save the username and image to Firestore (example implementation)
-      User? user = context.read<UserProvider>().user;
+      User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'username': usernameController.text,
-          'imageUrl': selectedImageUrl,
-        });
+        FirestoreService firestoreService = FirestoreService();
+        await firestoreService.addUser(
+          user.uid,
+          usernameController.text,
+          user.email!,
+          selectedImageUrl!,
+          // user.email!,
+          false,
+          false,
+          0,
+          0,
+          [],
+        );
         context.go('/navigator/home');
       }
     } else {
-      // Show validation error
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please fill in all fields')),
       );

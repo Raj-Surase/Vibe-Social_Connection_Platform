@@ -6,6 +6,7 @@ import 'package:vibe/Components/auth_tf.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
+import 'package:vibe/Database/firestore_service.dart';
 import 'package:vibe/Provider/userprovider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -43,7 +44,21 @@ class _LoginPageState extends State<LoginPage> {
         emailController.text.trim(),
         passwordController.text.trim(),
       );
-      context.replace('/profileinit');
+
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        FirestoreService firestoreService = FirestoreService();
+        Map<String, dynamic>? userData =
+            await firestoreService.getUser(user.uid);
+
+        if (userData == null ||
+            userData['user_name'] == null ||
+            userData['user_profile'] == null) {
+          context.replace('/profileinit');
+        } else {
+          context.replace('/navigator/home');
+        }
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
