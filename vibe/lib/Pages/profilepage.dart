@@ -6,6 +6,7 @@ import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vibe/Database/firestore_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -39,12 +40,29 @@ class _ProfilePageState extends State<ProfilePage> {
     },
   );
 
+  late Future<Map<String, dynamic>?> _userFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _userFuture = _fetchUserData();
+  }
+
+  Future<Map<String, dynamic>?> _fetchUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      FirestoreService firestoreService = FirestoreService();
+      return await firestoreService.getUser(user.uid);
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
       if (!userProvider.isLoggedIn) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          GoRouter.of(context).replace('/auth'); // Navigate to auth page
+          GoRouter.of(context).replace('/'); // Navigate to auth page
         });
         return Container(
           color: AppColor.surfaceBG,
@@ -61,11 +79,11 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (isLoading)
-                    SizedBox(
+              FutureBuilder<Map<String, dynamic>?>(
+                future: _userFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return SizedBox(
                       height: ValuesConstants.containerMedium,
                       width: ValuesConstants.containerMedium,
                       child: Padding(
@@ -76,28 +94,66 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: AppColor.componentActive,
                         ),
                       ),
-                    )
-                  else
-                    Container(
-                      height: ValuesConstants.containerMedium,
-                      width: ValuesConstants.containerMedium,
-                      decoration: BoxDecoration(
-                        color: AppColor.surfaceFG,
-                        borderRadius:
-                            BorderRadius.circular(ValuesConstants.radiusCircle),
-                        image: DecorationImage(image: NetworkImage(imageUrl)),
-                      ),
-                    ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: ValuesConstants.paddingTB),
-                    child: Text(
-                      'Session name',
-                      style: AppTypography.textStyle14Bold(
-                          color: AppColor.textHighEm),
-                    ),
-                  ),
-                ],
+                    );
+                  } else if (snapshot.hasError || !snapshot.hasData) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: ValuesConstants.containerMedium,
+                          width: ValuesConstants.containerMedium,
+                          decoration: BoxDecoration(
+                            color: AppColor.surfaceFG,
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: ValuesConstants.paddingTB),
+                          child: Text(
+                            'Error loading user data',
+                            style: AppTypography.textStyle14Bold(
+                              color: AppColor.textHighEm,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    var userData = snapshot.data!;
+                    var userName = userData['user_name'] ?? 'Unknown User';
+                    var imageUrl = userData['user_profile'] ?? '';
+
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: ValuesConstants.containerMedium,
+                          width: ValuesConstants.containerMedium,
+                          decoration: BoxDecoration(
+                            color: AppColor.surfaceFG,
+                            borderRadius: BorderRadius.circular(
+                                ValuesConstants.radiusCircle),
+                            image: imageUrl.isNotEmpty
+                                ? DecorationImage(image: NetworkImage(imageUrl))
+                                : null,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: ValuesConstants.paddingTB),
+                          child: Text(
+                            userName,
+                            style: AppTypography.textStyle14Bold(
+                              color: AppColor.textHighEm,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                },
               ),
               const SizedBox(
                 height: ValuesConstants.spaceVertical,

@@ -99,7 +99,9 @@ class _ProfileInitState extends State<ProfileInit> {
                                 child: Container(
                                   padding: const EdgeInsets.all(8.0),
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
+                                    // shape: BoxShape.circle,
+                                    borderRadius: BorderRadius.circular(
+                                        ValuesConstants.radiusMedium),
                                     color: selectedIndex == index
                                         ? AppColor.componentInactive
                                             .withOpacity(0.5)

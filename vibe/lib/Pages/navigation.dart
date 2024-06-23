@@ -64,7 +64,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
       if (!userProvider.isLoggedIn) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          GoRouter.of(context).replace('/auth'); // Navigate to auth page
+          GoRouter.of(context).replace('/'); // Navigate to auth page
         });
         return Container(
           color: AppColor.surfaceBG,
