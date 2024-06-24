@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vibe/Components/auth_tf.dart';
+import 'package:vibe/components/custom_textfield.dart';
 import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Database/firestore_service.dart';
@@ -54,9 +55,9 @@ class _LoginPageState extends State<LoginPage> {
         if (userData == null ||
             userData['user_name'] == null ||
             userData['user_profile'] == null) {
-          context.replace('/profileinit');
+          context.replace(AppRoutes.PROFILEINITROUTE);
         } else {
-          context.replace('/navigator/home');
+          context.replace(AppRoutes.HOMEROUTE);
         }
       }
     } catch (e) {
@@ -99,10 +100,10 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: ValuesConstants.paddingSmall,
               ),
-              AuthTextField(
+              CustomTextField(
                 hintText: "Email Address",
                 controller: emailController,
-                isSecure: false,
+                isEmail: true,
               ),
               const SizedBox(
                 height: ValuesConstants.paddingTB,
@@ -115,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: ValuesConstants.paddingSmall,
               ),
-              AuthTextField(
+              CustomTextField(
                 hintText: "Password",
                 controller: passwordController,
                 isSecure: true,
@@ -125,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  context.go('/reset_password');
+                  context.go(AppRoutes.RESETROUTE);
                 },
                 child: Text(
                   "Forgot password?",
@@ -159,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  context.replace('/register');
+                  context.replace(AppRoutes.REGISTERROUTE);
                 },
                 child: Text(
                   "Don't have an account? Sign up.",

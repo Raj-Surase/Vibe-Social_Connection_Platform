@@ -6,13 +6,19 @@ import 'package:vibe/Provider/applinks_deeplinks.dart';
 import 'package:vibe/Provider/platform_channel.dart';
 import 'package:vibe/Provider/userprovider.dart';
 import 'package:vibe/Constants/routes.dart';
+import 'package:vibe/components/queue_listview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  AppLinksDeepLink.instance.initDeepLinks();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => UserProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(
+            create: (context) => ListProvider()), // Add ListProvider
+      ],
       child: const MyApp(),
     ),
   );
@@ -27,38 +33,28 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    super.initState();
-    // Initialize deep links handling
-    AppLinksDeepLink.instance.initDeepLinks();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserProvider(),
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.light,
-          scaffoldBackgroundColor: AppColor.surfaceBG,
-          appBarTheme: AppBarTheme(
-            backgroundColor: AppColor.surfaceBG,
-            centerTitle: false,
-          ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: AppColor.surfaceBG,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColor.surfaceBG,
+          centerTitle: false,
         ),
-        darkTheme: ThemeData(
-          scaffoldBackgroundColor: AppColor.surfaceBG,
-          appBarTheme: AppBarTheme(
-            backgroundColor: AppColor.surfaceBG,
-            centerTitle: false,
-          ),
-        ),
-        themeMode: ThemeMode.light,
-        routerDelegate: router.routerDelegate,
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
       ),
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: AppColor.surfaceBG,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColor.surfaceBG,
+          centerTitle: false,
+        ),
+      ),
+      themeMode: ThemeMode.light,
+      routerDelegate: AppRoutes.router.routerDelegate,
+      routeInformationParser: AppRoutes.router.routeInformationParser,
+      routeInformationProvider: AppRoutes.router.routeInformationProvider,
     );
   }
 }

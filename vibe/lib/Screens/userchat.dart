@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Provider/userprovider.dart';
@@ -26,7 +27,8 @@ class _UserChatState extends State<UserChat> {
       builder: (context, userProvider, _) {
         if (!userProvider.isLoggedIn) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            GoRouter.of(context).replace('/login'); // Navigate to login page
+            GoRouter.of(context)
+                .replace(AppRoutes.INITIALROUTE); // Navigate to login page
           });
           return Container(
             color: AppColor.surfaceBG,

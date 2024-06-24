@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:vibe/Components/auth_tf.dart';
+import 'package:vibe/components/custom_textfield.dart';
 import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Database/firestore_service.dart';
@@ -171,7 +172,7 @@ class _ProfileInitState extends State<ProfileInit> {
           0,
           [],
         );
-        context.go('/navigator/home');
+        context.go(AppRoutes.HOMEROUTE);
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -244,7 +245,7 @@ class _ProfileInitState extends State<ProfileInit> {
                 const SizedBox(
                   height: ValuesConstants.paddingSmall,
                 ),
-                AuthTextField(
+                CustomTextField(
                   hintText: "Username",
                   controller: usernameController,
                   isUsername: true,

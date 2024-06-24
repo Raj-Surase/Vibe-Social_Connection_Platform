@@ -3,13 +3,13 @@ import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 
-class AuthButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final IconData icon;
   final String text;
   final Color color;
   final VoidCallback onPressed;
 
-  const AuthButton({
+  const PrimaryButton({
     super.key,
     required this.icon,
     required this.text,

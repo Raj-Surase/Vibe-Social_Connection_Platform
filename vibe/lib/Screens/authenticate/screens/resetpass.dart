@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vibe/Components/auth_tf.dart';
-import 'package:vibe/Components/customsnackbar.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
+import 'package:vibe/components/custom_textfield.dart';
+import 'package:vibe/components/custom_snackbar.dart';
 
 class ResetPassword extends StatefulWidget {
   ResetPassword({super.key});
@@ -92,7 +92,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               const SizedBox(
                 height: ValuesConstants.paddingSmall,
               ),
-              AuthTextField(
+              CustomTextField(
                 hintText: "Email Address",
                 controller: emailId,
                 isSecure: false,

@@ -3,11 +3,12 @@ import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 
-class AuthTextField extends StatefulWidget {
-  const AuthTextField({
+class CustomTextField extends StatefulWidget {
+  const CustomTextField({
     required this.hintText,
     this.isSecure = false,
     this.isUsername,
+    this.isEmail,
     required this.controller,
     this.isEnabled,
     Key? key,
@@ -16,14 +17,15 @@ class AuthTextField extends StatefulWidget {
   final String hintText;
   final bool? isEnabled;
   final bool? isUsername;
+  final bool? isEmail;
   final TextEditingController controller;
   final bool isSecure;
 
   @override
-  State<AuthTextField> createState() => _AuthTextFieldState();
+  State<CustomTextField> createState() => _AuthTextFieldState();
 }
 
-class _AuthTextFieldState extends State<AuthTextField> {
+class _AuthTextFieldState extends State<CustomTextField> {
   String? _validateEmail(String? value) {
     if (!widget.isSecure && widget.isUsername != true) {
       if (value == null || value.isEmpty) {
@@ -60,6 +62,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return null;
   }
 
+  String? _validateText(String? value) {
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -76,7 +82,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
           ? _validatePassword
           : widget.isUsername == true
               ? _validateUsername
-              : _validateEmail,
+              : widget.isEmail == true
+                  ? _validateEmail
+                  : _validateText,
       decoration: InputDecoration(
         labelText: widget.hintText,
         fillColor: AppColor.surfaceFG,

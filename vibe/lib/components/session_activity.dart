@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vibe/Components/usertab.dart';
 import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/values.dart';
+import 'package:vibe/components/user_tab.dart';
 
 class SessionActivity extends StatelessWidget {
   const SessionActivity({
@@ -18,7 +19,7 @@ class SessionActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push('/sessionactivity', extra: sessionName);
+        context.push(AppRoutes.SESSIONACTIVITYROUTE, extra: sessionName);
       },
       child: Column(
         children: [

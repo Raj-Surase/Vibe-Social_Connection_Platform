@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vibe/Constants/colors.dart';
+import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 
@@ -26,7 +27,7 @@ class _UserTabState extends State<UserTab> {
     return InkWell(
       onTap: () {
         if (widget.isClickable) {
-          context.push('/userchat', extra: widget.title);
+          context.push(AppRoutes.USERCHATROUTE, extra: widget.title);
         }
       },
       child: Row(

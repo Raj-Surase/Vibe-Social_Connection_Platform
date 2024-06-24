@@ -11,7 +11,7 @@ class Wrapper extends StatelessWidget {
   Wrapper({super.key});
 
   final String location =
-      router.routerDelegate.currentConfiguration.uri.toString();
+      AppRoutes.router.routerDelegate.currentConfiguration.uri.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +27,19 @@ class Wrapper extends StatelessWidget {
         if (userData == null ||
             userData['user_name'] == null ||
             userData['user_profile'] == null) {
-          if (location != '/profileinit') {
-            context.go('/profileinit');
+          if (location != AppRoutes.PROFILEINITROUTE) {
+            context.go(AppRoutes.PROFILEINITROUTE);
           }
         } else {
-          if (location != '/navigator/home') {
-            context.go('/navigator/home');
+          if (location != AppRoutes.HOMEROUTE) {
+            context.go(AppRoutes.HOMEROUTE);
           }
         }
       });
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (location != '/auth') {
-          context.go('/auth');
+        if (location != AppRoutes.AUTHROUTE) {
+          context.go(AppRoutes.AUTHROUTE);
         }
       });
     }

@@ -11,32 +11,44 @@ class AppLinksDeepLink extends GetxService {
 
   static AppLinksDeepLink get instance => _instance;
 
-  late AppLinks _appLinks;
+  late final AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
 
   @override
   void onInit() {
     super.onInit();
-    _appLinks = AppLinks();
-    initDeepLinks();
+    _initializeAppLinks();
+  }
+
+  void _initializeAppLinks() {
+    try {
+      _appLinks = AppLinks();
+      initDeepLinks();
+    } catch (e) {
+      debugPrint('Failed to initialize AppLinks: $e');
+    }
   }
 
   Future<void> initDeepLinks() async {
-    // Check initial link if app was in cold state (terminated)
-    final appLink = await _appLinks.getInitialLink();
-    if (appLink != null) {
-      var uri = Uri.parse(appLink.toString());
-      print('Here you can redirect from URL as per your need');
-    }
+    try {
+      // Check initial link if app was in cold state (terminated)
+      final appLink = await _appLinks.getInitialLink();
+      if (appLink != null) {
+        var uri = Uri.parse(appLink.toString());
+        print('Here you can redirect from URL as per your need');
+      }
 
-    // Handle link when app is in warm state (front or background)
-    _linkSubscription = _appLinks.uriLinkStream.listen((uriValue) {
-      print('You will listen to any URL updates');
-      print('Here you can redirect from URL as per your need');
-    }, onError: (err) {
-      debugPrint('====>>> error : $err');
-    }, onDone: () {
-      _linkSubscription?.cancel();
-    });
+      // Handle link when app is in warm state (front or background)
+      _linkSubscription = _appLinks.uriLinkStream.listen((uriValue) {
+        print('You will listen to any URL updates');
+        print('Here you can redirect from URL as per your need');
+      }, onError: (err) {
+        debugPrint('====>>> error : $err');
+      }, onDone: () {
+        _linkSubscription?.cancel();
+      });
+    } catch (e) {
+      debugPrint('Error in initDeepLinks: $e');
+    }
   }
 }
