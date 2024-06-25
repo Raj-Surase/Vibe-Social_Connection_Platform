@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:vibe/Constants/routes.dart';
+import 'package:vibe/Screens/home/navigation_vm.dart';
 import 'package:vibe/components/user_tab.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Provider/userprovider.dart';
-import 'package:vibe/screens/home/navigation_vm.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});

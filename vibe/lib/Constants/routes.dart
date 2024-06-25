@@ -1,11 +1,12 @@
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vibe/Screens/authenticate/screens/login.dart';
+import 'package:vibe/Screens/authenticate/screens/profileinit.dart';
+import 'package:vibe/Screens/authenticate/screens/register.dart';
+import 'package:vibe/Screens/authenticate/screens/resetpass.dart';
+import 'package:vibe/Screens/home/navigation.dart';
+import 'package:vibe/Screens/session/createsession.dart';
 import 'package:vibe/components/queue_listview.dart';
-import 'package:vibe/screens/home/navigation.dart';
-import 'package:vibe/Screens/authenticate/authenticate.dart';
-import 'package:vibe/Screens/authenticate/profile/profileinit.dart';
-import 'package:vibe/Screens/authenticate/register/register.dart';
-import 'package:vibe/Screens/authenticate/resetpass.dart';
+import 'package:vibe/Screens/authenticate/authentication.dart';
 import 'package:vibe/Screens/userchat.dart';
 import 'package:vibe/wrapper.dart';
 
@@ -36,7 +37,7 @@ class AppRoutes {
       ),
       GoRoute(
         path: AUTHROUTE,
-        builder: (context, state) => const Authenticate(),
+        builder: (context, state) => const AuthenticationPage(),
       ),
       GoRoute(
         path: LOGINROUTE,

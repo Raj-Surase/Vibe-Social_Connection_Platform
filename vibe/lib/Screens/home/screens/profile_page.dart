@@ -9,7 +9,7 @@ import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vibe/Database/firestore_service.dart';
-import 'package:vibe/screens/home/navigation_vm.dart';
+import 'package:vibe/Screens/home/navigation_vm.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

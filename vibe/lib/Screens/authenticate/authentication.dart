@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stacked/stacked.dart';
+import 'package:vibe/Screens/authenticate/authentication_vm.dart';
 import 'package:vibe/components/primary_button.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 
-class Authenticate extends StatefulWidget {
-  const Authenticate({super.key});
+class AuthenticationPage extends StatefulWidget {
+  const AuthenticationPage({super.key});
 
   @override
-  _AuthenticateState createState() => _AuthenticateState();
+  _AuthenticationPageState createState() => _AuthenticationPageState();
 }
 
-class _AuthenticateState extends State<Authenticate> {
+class _AuthenticationPageState extends State<AuthenticationPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ViewModelBuilder<AuthenticationPageViewModel>.reactive(
+        viewModelBuilder: () => AuthenticationPageViewModel(),
+        onViewModelReady: (viewModel) {
+          viewModel.initialise(context);
+          
+        
+        },
+        builder: (context, viewModel, child) {
+          return BackButtonListener(
+            onBackButtonPressed: () {
+              
+              return Future.value(true);
+            },
+            child: Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
             ValuesConstants.paddingLR,
@@ -57,6 +72,6 @@ class _AuthenticateState extends State<Authenticate> {
           ],
         ),
       ),
-    );
+    ),);});
   }
 }

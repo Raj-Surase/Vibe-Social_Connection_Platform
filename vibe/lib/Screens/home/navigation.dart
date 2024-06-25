@@ -3,17 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import 'package:stacked/stacked.dart';
-import 'package:vibe/Components/dialog_exit.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Provider/userprovider.dart';
-import 'package:vibe/screens/home/navigation_vm.dart';
-import 'package:vibe/screens/home/screens/friends_page.dart';
-import 'package:vibe/screens/home/screens/home_page.dart';
-import 'package:vibe/screens/home/screens/notifications_page.dart';
-import 'package:vibe/screens/home/screens/profile_page.dart';
+import 'package:vibe/Screens/home/navigation_vm.dart';
+import 'package:vibe/Screens/home/screens/friends_page.dart';
+import 'package:vibe/Screens/home/screens/home_page.dart';
+import 'package:vibe/Screens/home/screens/notifications_page.dart';
+import 'package:vibe/Screens/home/screens/profile_page.dart';
+import 'package:vibe/components/dialog_exit.dart';
 
 class NavigatorPage extends StatefulWidget {
   final int initialIndex;
