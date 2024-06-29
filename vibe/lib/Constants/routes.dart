@@ -1,13 +1,15 @@
 import 'package:go_router/go_router.dart';
-import 'package:vibe/Screens/authenticate/screens/login.dart';
-import 'package:vibe/Screens/authenticate/screens/profileinit.dart';
-import 'package:vibe/Screens/authenticate/screens/register.dart';
-import 'package:vibe/Screens/authenticate/screens/resetpass.dart';
-import 'package:vibe/Screens/home/navigation.dart';
-import 'package:vibe/Screens/session/createsession.dart';
-import 'package:vibe/components/queue_listview.dart';
-import 'package:vibe/Screens/authenticate/authentication.dart';
 import 'package:vibe/Screens/userchat.dart';
+import 'package:vibe/components/session_activity.dart';
+import 'package:vibe/screens/authenticate/authentication.dart';
+import 'package:vibe/screens/authenticate/screens/login/login.dart';
+import 'package:vibe/screens/authenticate/screens/profileinit/profile_init.dart';
+import 'package:vibe/screens/authenticate/screens/register/register.dart';
+import 'package:vibe/screens/authenticate/screens/resetpass/reset_pass.dart';
+import 'package:vibe/screens/home/navigation.dart';
+import 'package:vibe/screens/session/create_session/create_session.dart';
+import 'package:vibe/screens/session/player_queue/player_queue.dart';
+import 'package:vibe/screens/session/session_player/session_player.dart';
 import 'package:vibe/wrapper.dart';
 
 class AppRoutes {
@@ -22,7 +24,7 @@ class AppRoutes {
   static const String CREATESESSIONROUTE = "/create_session";
   static const String QUEUEROUTE = "/queue";
   static const String USERCHATROUTE = "/userchat";
-  static const String SESSIONACTIVITYROUTE = "/sessionactivity";
+  static const String SESSIONPLAYERROUTE = "/sessionplayer";
   static const String HOMEROUTE = "/home";
   static const String FRIENDSROUTE = "/friends";
   static const String NOTIFICATIONROUTE = "/notification";
@@ -66,14 +68,12 @@ class AppRoutes {
       GoRoute(
           path: USERCHATROUTE,
           builder: (context, state) {
-            final String title = state.extra as String;
-            return UserChat(title: title);
+            return UserChat();
           }),
       GoRoute(
-          path: SESSIONACTIVITYROUTE,
+          path: SESSIONPLAYERROUTE,
           builder: (context, state) {
-            final String title = state.extra as String;
-            return UserChat(title: title);
+            return SessionPlayer();
           }),
       GoRoute(
         path: HOMEROUTE,

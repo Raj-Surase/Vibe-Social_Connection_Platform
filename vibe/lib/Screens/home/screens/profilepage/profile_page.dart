@@ -3,13 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:vibe/Constants/routes.dart';
-import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/provider/user_provider.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:vibe/Database/firestore_service.dart';
 import 'package:vibe/Screens/home/navigation_vm.dart';
+import 'package:vibe/screens/home/screens/profilepage/profile_page_vm.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -19,23 +18,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late Future<Map<String, dynamic>?> _userFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _userFuture = _fetchUserData();
-  }
-
-  Future<Map<String, dynamic>?> _fetchUserData() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      FirestoreService firestoreService = FirestoreService();
-      return await firestoreService.getUser(user.uid);
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
@@ -49,8 +31,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ); // Return an empty container while redirecting
       }
 
-      return ViewModelBuilder<NavigatorPageViewModel>.reactive(
-          viewModelBuilder: () => NavigatorPageViewModel(),
+      return ViewModelBuilder<ProfilePageViewModel>.reactive(
+          viewModelBuilder: () => ProfilePageViewModel(),
           onViewModelReady: (viewModel) {
             viewModel.initialise(context);
           },
@@ -66,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FutureBuilder<Map<String, dynamic>?>(
-                      future: _userFuture,
+                      future: viewModel.userFuture,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -586,13 +568,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: ValuesConstants.containerSmallMedium,
                       child: TextButton(
                         onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          userProvider.signOut();
-                          context.replace(AppRoutes.INITIALROUTE);
+                          viewModel.signOut(context, userProvider);
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                              WidgetStatePropertyAll(AppColor.surfaceFG),
+                              MaterialStateProperty.all(AppColor.surfaceFG),
                         ),
                         child: Text(
                           'Logout',

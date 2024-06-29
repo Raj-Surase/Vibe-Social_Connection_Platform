@@ -7,13 +7,13 @@ import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
-import 'package:vibe/Provider/userprovider.dart';
 import 'package:vibe/Screens/home/navigation_vm.dart';
-import 'package:vibe/Screens/home/screens/friends_page.dart';
-import 'package:vibe/Screens/home/screens/home_page.dart';
-import 'package:vibe/Screens/home/screens/notifications_page.dart';
-import 'package:vibe/Screens/home/screens/profile_page.dart';
 import 'package:vibe/components/dialog_exit.dart';
+import 'package:vibe/provider/user_provider.dart';
+import 'package:vibe/screens/home/screens/friendspage/friends_page.dart';
+import 'package:vibe/screens/home/screens/homepage/home_page.dart';
+import 'package:vibe/screens/home/screens/notificationpage/notifications_page.dart';
+import 'package:vibe/screens/home/screens/profilepage/profile_page.dart';
 
 class NavigatorPage extends StatefulWidget {
   final int initialIndex;

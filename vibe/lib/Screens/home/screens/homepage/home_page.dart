@@ -7,6 +7,7 @@ import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/Screens/home/navigation_vm.dart';
 import 'package:vibe/components/session_activity.dart';
+import 'package:vibe/screens/home/screens/homepage/home_page_vm.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,21 +17,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void getUsers() {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore.collection('users').get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc["user_name"]);
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<NavigatorPageViewModel>.reactive(
-        viewModelBuilder: () => NavigatorPageViewModel(),
+    return ViewModelBuilder<HomePageViewModel>.reactive(
+        viewModelBuilder: () => HomePageViewModel(),
         onViewModelReady: (viewModel) {
           viewModel.initialise(context);
+          if (!viewModel.isLoggedIn(context)) {
+            viewModel.redirectToAuthPage(context);
+          }
         },
         builder: (context, viewModel, child) {
           return const SingleChildScrollView(

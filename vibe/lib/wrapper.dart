@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Database/firestore_service.dart';
-import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/provider/user_provider.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/typography.dart';
 

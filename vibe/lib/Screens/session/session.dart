@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 import 'package:vibe/Constants/colors.dart';
 import 'package:vibe/Constants/routes.dart';
 import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
-import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/provider/user_provider.dart';
+import 'package:vibe/screens/session/session_vm.dart';
 
-class SessionView extends StatefulWidget {
+class SessionView extends StatelessWidget {
   const SessionView({super.key});
 
   @override
-  State<SessionView> createState() => _SessionViewState();
-}
-
-class _SessionViewState extends State<SessionView> {
-  final TextEditingController _messageController = TextEditingController();
-  final List messages = List.filled(50, "Hello...");
-  @override
   Widget build(BuildContext context) {
-    return Consumer<UserProvider>(
-      builder: (context, userProvider, _) {
-        if (!userProvider.isLoggedIn) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            GoRouter.of(context)
-                .replace(AppRoutes.INITIALROUTE); // Navigate to login page
-          });
-          return Container(
-            color: AppColor.surfaceBG,
-          ); // Return an empty container while redirecting
+    return ViewModelBuilder<SessionViewModel>.reactive(
+      viewModelBuilder: () => SessionViewModel(),
+      onViewModelReady: (viewModel) {
+        if (!viewModel.isLoggedIn(context)) {
+          viewModel.redirectToLoginPage(context);
+        }
+      },
+      builder: (context, viewModel, child) {
+        if (!viewModel.isLoggedIn(context)) {
+          return Container(color: AppColor.surfaceBG);
         }
 
         return Scaffold(
           body: Padding(
             padding: const EdgeInsets.fromLTRB(
-                ValuesConstants.paddingLR,
-                ValuesConstants.containerMedium,
-                ValuesConstants.paddingLR,
-                ValuesConstants.paddingTB),
+              ValuesConstants.paddingLR,
+              ValuesConstants.containerMedium,
+              ValuesConstants.paddingLR,
+              ValuesConstants.paddingTB,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,8 +44,9 @@ class _SessionViewState extends State<SessionView> {
                     Container(
                       height: ValuesConstants.containerLarge,
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(ValuesConstants.radiusLarge),
+                        borderRadius: BorderRadius.circular(
+                          ValuesConstants.radiusLarge,
+                        ),
                         color: AppColor.surfaceFG,
                       ),
                     ),
@@ -59,7 +56,8 @@ class _SessionViewState extends State<SessionView> {
                     Text(
                       "Session Name",
                       style: AppTypography.textStyle14Bold(
-                          color: AppColor.textHighEm),
+                        color: AppColor.textHighEm,
+                      ),
                     ),
                     const SizedBox(
                       height: ValuesConstants.paddingSmall,
@@ -67,7 +65,8 @@ class _SessionViewState extends State<SessionView> {
                     Text(
                       "Views | Started on",
                       style: AppTypography.textStyle8Normal(
-                          color: AppColor.textHighEm),
+                        color: AppColor.textHighEm,
+                      ),
                     ),
                     const SizedBox(
                       height: ValuesConstants.paddingTB,
@@ -82,7 +81,8 @@ class _SessionViewState extends State<SessionView> {
                               width: ValuesConstants.containerSmall,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
-                                    ValuesConstants.radiusCircle),
+                                  ValuesConstants.radiusCircle,
+                                ),
                                 color: AppColor.surfaceFG,
                               ),
                             ),
@@ -92,24 +92,29 @@ class _SessionViewState extends State<SessionView> {
                             Text(
                               "Username",
                               style: AppTypography.textStyle10Bold(
-                                  color: AppColor.textHighEm),
+                                color: AppColor.textHighEm,
+                              ),
                             ),
                           ],
                         ),
                         TextButton(
-                          onPressed: (() {}),
+                          onPressed: () {},
                           style: ButtonStyle(
-                            fixedSize: const WidgetStatePropertyAll(
-                              Size(ValuesConstants.containerMediumLarge,
-                                  ValuesConstants.containerSmall),
+                            fixedSize: MaterialStateProperty.all(
+                              Size(
+                                ValuesConstants.containerMediumLarge,
+                                ValuesConstants.containerSmall,
+                              ),
                             ),
-                            backgroundColor:
-                                WidgetStatePropertyAll(AppColor.surfaceFG),
+                            backgroundColor: MaterialStateProperty.all(
+                              AppColor.surfaceFG,
+                            ),
                           ),
                           child: Text(
                             "Add Friend",
                             style: AppTypography.textStyle10Bold(
-                                color: AppColor.textHighEm),
+                              color: AppColor.textHighEm,
+                            ),
                           ),
                         ),
                       ],
@@ -120,20 +125,22 @@ class _SessionViewState extends State<SessionView> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ListView.builder(
-                      reverse: true, // Display messages from bottom to top
-                      itemCount: messages.length,
+                      reverse: true,
+                      itemCount: viewModel.messages.length,
                       itemBuilder: (context, index) {
                         return Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: ValuesConstants.paddingTB),
+                                top: ValuesConstants.paddingTB,
+                              ),
                               child: Container(
                                 height: ValuesConstants.containerSmall,
                                 width: ValuesConstants.containerSmall,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
-                                      ValuesConstants.radiusCircle),
+                                    ValuesConstants.radiusCircle,
+                                  ),
                                   color: AppColor.surfaceFG,
                                 ),
                               ),
@@ -142,9 +149,10 @@ class _SessionViewState extends State<SessionView> {
                               width: ValuesConstants.paddingSmall,
                             ),
                             Text(
-                              messages[index].toString(),
+                              viewModel.messages[index].toString(),
                               style: AppTypography.textStyle10Bold(
-                                  color: AppColor.textHighEm),
+                                color: AppColor.textHighEm,
+                              ),
                             ),
                           ],
                         );
@@ -158,34 +166,36 @@ class _SessionViewState extends State<SessionView> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
-                              ValuesConstants.radiusLarge),
+                            ValuesConstants.radiusLarge,
+                          ),
                           color: AppColor.surfaceFG,
                         ),
                         padding: const EdgeInsets.only(
-                            left: ValuesConstants.paddingTB,
-                            right: ValuesConstants.paddingTB),
+                          left: ValuesConstants.paddingTB,
+                          right: ValuesConstants.paddingTB,
+                        ),
                         child: TextField(
-                          controller: _messageController,
+                          controller: viewModel.messageController,
                           style: AppTypography.textStyle14Bold(
-                              color: AppColor.textHighEm),
+                            color: AppColor.textHighEm,
+                          ),
                           cursorRadius: const Radius.circular(
-                              ValuesConstants.radiusSmall),
+                            ValuesConstants.radiusSmall,
+                          ),
                           cursorColor: AppColor.componentActive,
                           decoration: InputDecoration(
                             hintText: 'Enter your message...',
                             hintStyle: AppTypography.textStyle14Normal(
-                                color: AppColor.textHighEm),
+                              color: AppColor.textHighEm,
+                            ),
                             border: InputBorder.none,
-
-                            // fillColor: AppColor.surfaceFG,
-                            // filled: true,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(width: ValuesConstants.paddingSmall),
                     IconButton(
-                      onPressed: (() {}),
+                      onPressed: viewModel.sendMessage,
                       icon: Icon(
                         Icons.send_rounded,
                         color: AppColor.componentActive,

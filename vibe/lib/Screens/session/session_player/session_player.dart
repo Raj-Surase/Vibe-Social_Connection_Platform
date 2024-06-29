@@ -7,16 +7,16 @@ import 'package:vibe/Constants/typography.dart';
 import 'package:vibe/Constants/values.dart';
 import 'package:vibe/provider/user_provider.dart';
 
-class UserChat extends StatefulWidget {
-  const UserChat({this.title = "User", super.key});
+class SessionPlayer extends StatefulWidget {
+  const SessionPlayer({this.title = "User", super.key});
 
   final String title;
 
   @override
-  State<UserChat> createState() => _UserChatState();
+  State<SessionPlayer> createState() => _SessionPlayerState();
 }
 
-class _UserChatState extends State<UserChat> {
+class _SessionPlayerState extends State<SessionPlayer> {
   final TextEditingController _messageController = TextEditingController();
 
   final List messages = List.filled(50, "Hello...");
@@ -35,45 +35,59 @@ class _UserChatState extends State<UserChat> {
           ); // Return an empty container while redirecting
         }
         return Scaffold(
-          appBar: AppBar(
-            leadingWidth: ValuesConstants.containerMediumLarge,
-            leading: IconButton(
-              onPressed: (() {
-                context.pop();
-              }),
-              icon: Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: AppColor.textHighEm,
-                    size: ValuesConstants.iconSize,
-                  ),
-                  const SizedBox(
-                    width: ValuesConstants.paddingSmall,
-                  ),
-                  Container(
-                    height: ValuesConstants.iconSize,
-                    width: ValuesConstants.iconSize,
-                    decoration: BoxDecoration(
-                      color: AppColor.textHighEm,
-                      borderRadius:
-                          BorderRadius.circular(ValuesConstants.radiusCircle),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            titleSpacing: 0,
-            title: Text(
-              widget.title,
-              style: AppTypography.textStyle14Bold(color: AppColor.textHighEm),
-            ),
-          ),
+          // appBar: AppBar(),
           body: Padding(
-            padding: const EdgeInsets.fromLTRB(ValuesConstants.paddingLR, 0,
-                ValuesConstants.paddingLR, ValuesConstants.paddingTB),
+            padding: const EdgeInsets.fromLTRB(
+              ValuesConstants.paddingLR,
+              ValuesConstants.containerMedium,
+              ValuesConstants.paddingLR,
+              ValuesConstants.paddingTB,
+            ),
             child: Column(
               children: [
+                Container(
+                  height: ValuesConstants.containerLarge,
+                  width: ValuesConstants.screenWidth(context),
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(ValuesConstants.radiusMedium),
+                    color: AppColor.surfaceFG,
+                  ),
+                ),
+                SizedBox(
+                  height: ValuesConstants.paddingTB,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(ValuesConstants.radiusMedium),
+                    color: AppColor.surfaceFG,
+                  ),
+                  padding: EdgeInsets.all(ValuesConstants.paddingSmall),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: ValuesConstants.containerSmallMedium,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              ValuesConstants.radiusSmall),
+                          color: AppColor.componentInactive,
+                        ),
+                      ),
+                      SizedBox(
+                        width: ValuesConstants.paddingSmall,
+                      ),
+                      Container(
+                        height: ValuesConstants.containerSmallMedium,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              ValuesConstants.radiusSmall),
+                          color: AppColor.componentBorder,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: ListView.builder(
                     reverse: true, // Display messages from bottom to top

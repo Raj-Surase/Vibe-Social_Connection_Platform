@@ -22,56 +22,50 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         viewModelBuilder: () => AuthenticationPageViewModel(),
         onViewModelReady: (viewModel) {
           viewModel.initialise(context);
-          
-        
         },
         builder: (context, viewModel, child) {
-          return BackButtonListener(
-            onBackButtonPressed: () {
-              
-              return Future.value(true);
-            },
-            child: Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(
-            ValuesConstants.paddingLR,
-            ValuesConstants.paddingTB,
-            ValuesConstants.paddingLR,
-            ValuesConstants.paddingTB),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                "Welcome!",
-                style:
-                    AppTypography.textStyle24Bold(color: AppColor.textHighEm),
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                  ValuesConstants.paddingLR,
+                  ValuesConstants.paddingTB,
+                  ValuesConstants.paddingLR,
+                  ValuesConstants.paddingTB),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      "Welcome!",
+                      style: AppTypography.textStyle24Bold(
+                          color: AppColor.textHighEm),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: ValuesConstants.containerSmallMedium,
+                  ),
+                  PrimaryButton(
+                    icon: Icons.g_mobiledata_rounded,
+                    text: "Sign in with Google",
+                    color: AppColor.primaryButton,
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: ValuesConstants.paddingTB,
+                  ),
+                  PrimaryButton(
+                    icon: Icons.email_rounded,
+                    text: "Sign in with Email",
+                    color: AppColor.componentBorder,
+                    onPressed: () {
+                      viewModel.navigateToLogin(context);
+                    },
+                  ),
+                ],
               ),
             ),
-            const SizedBox(
-              height: ValuesConstants.containerSmallMedium,
-            ),
-            PrimaryButton(
-              icon: Icons.g_mobiledata_rounded,
-              text: "Sign in with Google",
-              color: AppColor.primaryButton,
-              onPressed: () {},
-            ),
-            const SizedBox(
-              height: ValuesConstants.paddingTB,
-            ),
-            PrimaryButton(
-              icon: Icons.email_rounded,
-              text: "Sign in with Email",
-              color: AppColor.componentBorder,
-              onPressed: () {
-                context.push(AppRoutes.LOGINROUTE);
-              },
-            ),
-          ],
-        ),
-      ),
-    ),);});
+          );
+        });
   }
 }

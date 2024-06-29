@@ -4,9 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:vibe/Provider/applinks_deeplinks.dart';
 import 'package:vibe/Provider/platform_channel.dart';
-import 'package:vibe/Provider/userprovider.dart';
+import 'package:vibe/provider/user_provider.dart';
 import 'package:vibe/Constants/routes.dart';
-import 'package:vibe/components/queue_listview.dart';
+import 'package:vibe/provider/list_provide.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
